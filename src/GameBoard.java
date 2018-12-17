@@ -3,7 +3,7 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class GameBoard {
-    private Rectangle[][] overallGameBoard;
+    private Square[][] overallGameBoard;
     private ArrayList<int[]> unoccupiedCoordinates;
     //private ArrayList<int[]> occupiedCoordinates;
     private int[] possibleGeneratedValue = new int[]{2,4}; // odds of 2 are 90%, odds of 4 are 10%
@@ -12,10 +12,10 @@ public class GameBoard {
     public GameBoard() {
         unoccupiedCoordinates = new ArrayList<int[]>();
         //occupiedCoordinates = new ArrayList<int[]>();
-        overallGameBoard = new Rectangle[4][4];
+        overallGameBoard = new Square[4][4];
         for (int i = 0; i < 4; i++) {
             for (int j = 0; j < 4; j++) {
-                overallGameBoard[i][j] = new Rectangle();
+                overallGameBoard[i][j] = new Square();
             }
         }
         updateUnoccupied();
@@ -76,7 +76,7 @@ public class GameBoard {
     }
 
     public void generateRandomPiece() {
-        Rectangle rect = new Rectangle();
+        Square rect = new Square();
         int rectVal = possibleGeneratedValue[randomValueGenerator()];
         rect.setValue(rectVal);
         int[] rectLoc = randomCoordinateGenerator();
