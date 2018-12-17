@@ -1,3 +1,5 @@
+import java.util.Arrays;
+
 public class Rectangle {
 
     private int intValue;
@@ -12,6 +14,10 @@ public class Rectangle {
 
     public void setValue(int addOn) {
         intValue+= addOn;
+    }
+
+    public void resetValue() {
+        intValue = 0;
     }
 
     public int getValue() {
@@ -32,6 +38,10 @@ public class Rectangle {
 
     public int getyCoord() {
          return yCoord;
+    }
+
+    public void doubleValue() {
+        intValue *= 2;
     }
 
     public String toString() {
