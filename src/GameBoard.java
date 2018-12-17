@@ -1,11 +1,10 @@
-import java.util.Arrays;
 import java.util.ArrayList;
 import java.util.Random;
 
 public class GameBoard {
     private Rectangle[][] overallGameBoard;
     private ArrayList<int[]> unoccupiedCoordinates;
-    private int[] possibleGeneratedValue = new int[]{2,4};
+    private int[] possibleGeneratedValue = new int[]{2,4}; // odds of 2 are 90%, odds of 4 are 10%
     private Random rand = new Random();
 
     public GameBoard() {
@@ -21,8 +20,8 @@ public class GameBoard {
         Rectangle secondRect = new Rectangle();
 
         // always starts off with two random rectangles of either value 2 or 4
-        int firstRectVal = possibleGeneratedValue[rand.nextInt(2)];
-        int secondRectVal = possibleGeneratedValue[rand.nextInt(2)];
+        int firstRectVal = possibleGeneratedValue[randomValueGenerator()];
+        int secondRectVal = possibleGeneratedValue[randomValueGenerator()];
         firstRect.setValue(firstRectVal);
         secondRect.setValue(secondRectVal);
 
@@ -45,6 +44,16 @@ public class GameBoard {
     public int[] randomCoordinateGenerator() {
         int n = rand.nextInt(unoccupiedCoordinates.size());
         return unoccupiedCoordinates.get(n);
+    }
+
+    public int randomValueGenerator() {
+        double n = rand.nextDouble();
+        if (n < .90) {
+            return 0;
+        }
+        else {
+            return 1;
+        }
     }
 
     public void printViewer() {
