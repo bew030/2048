@@ -44,6 +44,7 @@ public class GameBoard {
             }
         }
         updateUnoccupied();
+        generateRandomPiece();
 
     }
 
