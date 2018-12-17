@@ -18,6 +18,10 @@ public class Square {
         return intValue;
     }
 
+    public void resetValue() {
+        intValue = 0;
+    }
+
     public void setxCoord(int x) {
         xCoord = x;
     }
@@ -32,6 +36,10 @@ public class Square {
 
     public int getyCoord() {
          return yCoord;
+    }
+
+    public void doubleValue() {
+        intValue *= 2;
     }
 
     public String toString() {
