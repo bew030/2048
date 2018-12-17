@@ -76,13 +76,13 @@ public class GameBoard {
     }
 
     public void generateRandomPiece() {
-        Square rect = new Square();
-        int rectVal = possibleGeneratedValue[randomValueGenerator()];
-        rect.setValue(rectVal);
-        int[] rectLoc = randomCoordinateGenerator();
-        rect.setxCoord(rectLoc[0]);
-        rect.setyCoord(rectLoc[1]);
-        overallGameBoard[rect.getxCoord()][rect.getyCoord()] = rect;
+        Square square = new Square();
+        int squareVal = possibleGeneratedValue[randomValueGenerator()];
+        square.setValue(squareVal);
+        int[] squareLoc = randomCoordinateGenerator();
+        square.setxCoord(squareLoc[0]);
+        square.setyCoord(squareLoc[1]);
+        overallGameBoard[square.getxCoord()][square.getyCoord()] = square;
         updateUnoccupied();
     }
 
