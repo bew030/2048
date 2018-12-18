@@ -180,18 +180,18 @@ public class Gui2048 extends Application {
     pane.add(title, 0, 0);
     GridPane.setHalignment(title, HPos.LEFT);
     pane.add(textNums[WIDTH - 1][0], WIDTH - 1, 0);
-
+    colorBoard();
     updateFont();
 
-      this.stack = new StackPane();
-      stack.getChildren.addAll(pane);
+    this.stack = new StackPane();
+    stack.getChildren.addAll(pane);
 
-      this.scene = new Scene(stack);
-      scene.setOnKeyPressed(new KeyHandler());
+    this.scene = new Scene(stack);
+    scene.setOnKeyPressed(new KeyHandler());
 
-      primaryStage.setTitle("2048");
-      primaryStage.setScene(scene);
-      primaryStage.show();
+    primaryStage.setTitle("2048");
+    primaryStage.setScene(scene);
+    primaryStage.show();
     }
 
 
