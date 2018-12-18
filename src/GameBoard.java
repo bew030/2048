@@ -87,15 +87,17 @@ public class GameBoard {
                     if (overallGameBoard[i][k].getValue()!=0 && (overallGameBoard[i][k].getValue() != overallGameBoard[i][j].getValue())) {
                         break;
                     }
-                    else if (overallGameBoard[i][k].getValue() == overallGameBoard[i][j].getValue()) {
-                        overallGameBoard[i][k].doubleValue();
-                        score += overallGameBoard[i][k].getValue();
-                        if (overallGameBoard[i][k].getValue()>maxNumber) {
-                            maxNumber = overallGameBoard[i][k].getValue();
+                    if (overallGameBoard[i][k].getValue()!=0) {
+                        if (overallGameBoard[i][k].getValue() == overallGameBoard[i][j].getValue()) {
+                            overallGameBoard[i][k].doubleValue();
+                            score += overallGameBoard[i][k].getValue();
+                            if (overallGameBoard[i][k].getValue()>maxNumber) {
+                                maxNumber = overallGameBoard[i][k].getValue();
+                            }
+                            overallGameBoard[i][j].resetValue();
+                            endCoord = k;
+                            piecesMoved = true;
                         }
-                        overallGameBoard[i][j].resetValue();
-                        endCoord = k;
-                        piecesMoved = true;
                     }
                 }
             }
@@ -130,15 +132,17 @@ public class GameBoard {
                     if (overallGameBoard[i][k].getValue()!=0 && overallGameBoard[i][k].getValue() != overallGameBoard[i][j].getValue()) {
                         break;
                     }
-                    else if (overallGameBoard[i][k].getValue() == overallGameBoard[i][j].getValue()) {
-                        overallGameBoard[i][k].doubleValue();
-                        score += overallGameBoard[i][k].getValue();
-                        if (overallGameBoard[i][k].getValue()>maxNumber) {
-                            maxNumber = overallGameBoard[i][k].getValue();
+                    if (overallGameBoard[i][k].getValue()!=0) {
+                        if (overallGameBoard[i][k].getValue() == overallGameBoard[i][j].getValue()) {
+                            overallGameBoard[i][k].doubleValue();
+                            score += overallGameBoard[i][k].getValue();
+                            if (overallGameBoard[i][k].getValue()>maxNumber) {
+                                maxNumber = overallGameBoard[i][k].getValue();
+                            }
+                            overallGameBoard[i][j].resetValue();
+                            endCoord = k;
+                            piecesMoved = true;
                         }
-                        overallGameBoard[i][j].resetValue();
-                        endCoord = k;
-                        piecesMoved = true;
                     }
                 }
             }
@@ -174,15 +178,17 @@ public class GameBoard {
                     if (overallGameBoard[k][j].getValue()!=0 && overallGameBoard[k][j].getValue() != overallGameBoard[i][j].getValue()) {
                         break;
                     }
-                    else if (overallGameBoard[k][j].getValue() == overallGameBoard[i][j].getValue()) {
-                        overallGameBoard[k][j].doubleValue();
-                        score += overallGameBoard[k][j].getValue();
-                        if (overallGameBoard[k][j].getValue()>maxNumber) {
-                            maxNumber = overallGameBoard[k][j].getValue();
+                    if (overallGameBoard[k][j].getValue()!=0) {
+                        if (overallGameBoard[k][j].getValue() == overallGameBoard[i][j].getValue()) {
+                            overallGameBoard[k][j].doubleValue();
+                            score += overallGameBoard[k][j].getValue();
+                            if (overallGameBoard[k][j].getValue()>maxNumber) {
+                                maxNumber = overallGameBoard[k][j].getValue();
+                            }
+                            overallGameBoard[i][j].resetValue();
+                            endCoord = k;
+                            piecesMoved = true;
                         }
-                        overallGameBoard[i][j].resetValue();
-                        endCoord = k;
-                        piecesMoved = true;
                     }
                 }
             }
@@ -219,15 +225,17 @@ public class GameBoard {
                     if (overallGameBoard[k][j].getValue()!=0 && overallGameBoard[k][j].getValue() != overallGameBoard[i][j].getValue()) {
                         break;
                     }
-                    else if (overallGameBoard[k][j].getValue() == overallGameBoard[i][j].getValue()) {
-                        overallGameBoard[k][j].doubleValue();
-                        score += overallGameBoard[k][j].getValue();
-                        if (overallGameBoard[k][j].getValue()>maxNumber) {
-                            maxNumber = overallGameBoard[k][j].getValue();
+                    if (overallGameBoard[k][j].getValue()!=0) {
+                        if (overallGameBoard[k][j].getValue() == overallGameBoard[i][j].getValue()) {
+                            overallGameBoard[k][j].doubleValue();
+                            score += overallGameBoard[k][j].getValue();
+                            if (overallGameBoard[k][j].getValue()>maxNumber) {
+                                maxNumber = overallGameBoard[k][j].getValue();
+                            }
+                            overallGameBoard[i][j].resetValue();
+                            endCoord = k;
+                            piecesMoved = true;
                         }
-                        overallGameBoard[i][j].resetValue();
-                        endCoord = k;
-                        piecesMoved = true;
                     }
                 }
             }
