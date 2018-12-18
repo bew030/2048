@@ -189,9 +189,8 @@ public class Gui2048 extends Application {
     GridPane.setHalignment(title, HPos.LEFT);
     pane.add(score, WIDTH - 1, 0);
     GridPane.setHalignment(score, HPos.RIGHT);
-    //pane.add();
     colorBoard();
-    //updateFont();
+    updateFont();
 
     this.stack = new StackPane();
     stack.getChildren().addAll(pane);
