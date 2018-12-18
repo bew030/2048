@@ -83,8 +83,8 @@ public class Gui2048 extends Application {
 
   //needs public for game board height and width
   private void copyBoard() {
-    for (int i = 0; i < board.getHeight(); i++) {
-      for (int j = 0; j < board.getWidth(); j++) {
+    for (int i = 0; i < board.getWidth(); i++) {
+      for (int j = 0; j < board.getHeight(); j++) {
         copySquares[i][j] = board.overallGameBoard[i][j];
       }
     }
@@ -131,17 +131,17 @@ public class Gui2048 extends Application {
         newTile.setHeight(100);
 
         tiles[x][y] = newTile;
-        tiles[x][y].setFill(replaceColor(copySquares[y][x].getValue()));
+        tiles[x][y].setFill(replaceColor(copySquares[x][y].getValue()));
         pane.add(tiles[x][y], x, y + 1);
 
         Text tileText = new Text();
-        tileText.setText(copySquares[y][x].toString());
+        tileText.setText(copySquares[x][y].toString());
         textNums[x][y] = tileText;
       }
     }
     for (int i = 0; i < HEIGHT; i++) {
       for (int j = 0; j < WIDTH; j++) {
-        if (copySquares[j][i].getValue() != 0) {
+        if (copySquares[i][j].getValue() != 0) {
           pane.add(textNums[i][j], i, j + 1);
           GridPane.setHalignment(textNums[i][j], HPos.CENTER);
         }
@@ -244,7 +244,6 @@ public class Gui2048 extends Application {
         board.gameOver = true;
       }
 
-      
       update(); //updates GUI after each move
 
       //prints game over message
