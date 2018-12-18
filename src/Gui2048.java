@@ -217,6 +217,17 @@ public class Gui2048 extends Application {
     GridPane.setHalignment(score, HPos.CENTER);
     colorBoard();
     updateFont();
+    //updates color of text to reflect value
+    for (int i = 0; i < HEIGHT; i++) {
+      for (int j = 0; j < WIDTH; j++) {
+        if (copySquares[j][i].getValue() < 8) {
+          textNums[i][j].setFill(COLOR_VALUE_DARK);
+        }
+        else {
+          textNums[i][j].setFill(COLOR_VALUE_LIGHT);
+        }
+      }
+    }
 
 
     //creates new stack pane to hold GridPane object, connects KeyHandler and
@@ -272,6 +283,7 @@ public class Gui2048 extends Application {
 
       //prints game over message
       if (board.gameOver() || board.gameOver) {
+        board.gameOver = true;
         Text endGame = new Text();
         endGame.setText("Game Over!");
         endGame.setFont(Font.font("Times New Roman", FontWeight.BOLD, 40));
