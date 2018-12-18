@@ -81,10 +81,14 @@ public class GameBoard {
     public void dropLeft() {
         for (int i = 0; i < height; i++) { // if you don't include this for loop, some stuff doesn't get combined
             for (int j = 1; j < width; j++) {
-                if (overallGameBoard[i][j-1].getValue()!=0) {
-                    if (overallGameBoard[i][j-1].getValue()==overallGameBoard[i][j].getValue()) { // if conditions for if side item is of equal value
-                        overallGameBoard[i][j-1].doubleValue();
-                        score += overallGameBoard[i][j-1].getValue();
+                for (int k = j-1; k > -1; k--) {
+
+                    if (overallGameBoard[i][k].getValue()!=0 && overallGameBoard[i][k].getValue() != overallGameBoard[i][j].getValue()) {
+                        break;
+                    }
+                    else if (overallGameBoard[i][k].getValue() == overallGameBoard[i][j].getValue()) {
+                        overallGameBoard[i][k].doubleValue();
+                        score += overallGameBoard[i][k].getValue();
                         overallGameBoard[i][j].resetValue();
                         piecesMoved = true;
                     }
@@ -116,10 +120,13 @@ public class GameBoard {
     public void dropRight() {
         for (int i = 0; i < height; i++) { // if you don't include this for loop, some stuff doesn't get combined
             for (int j = width-2; j > -1; j--) { // doublecheck width-2
-                if (overallGameBoard[i][j+1].getValue()!=0) {
-                    if (overallGameBoard[i][j+1].getValue()==overallGameBoard[i][j].getValue()) { // if conditions for if side item is of equal value
-                        overallGameBoard[i][j+1].doubleValue();
-                        score += overallGameBoard[i][j+1].getValue();
+                for (int k = j+1; k < width; k++) {
+                    if (overallGameBoard[i][k].getValue()!=0 && overallGameBoard[i][k].getValue() != overallGameBoard[i][j].getValue()) {
+                        break;
+                    }
+                    else if (overallGameBoard[i][k].getValue() == overallGameBoard[i][j].getValue()) {
+                        overallGameBoard[i][k].doubleValue();
+                        score += overallGameBoard[i][k].getValue();
                         overallGameBoard[i][j].resetValue();
                         piecesMoved = true;
                     }
@@ -135,6 +142,7 @@ public class GameBoard {
                         int value = overallGameBoard[i][j].getValue();
                         overallGameBoard[i][j].resetValue();
                         overallGameBoard[i][k].setValue(value);
+                        k--;
                         piecesMoved = true;
                         break;
                     }
@@ -149,12 +157,32 @@ public class GameBoard {
     }
 
     public void dropUp() {
+        for (int i = 0; i < height; i++) { // if you don't include this for loop, some stuff doesn't get combined
+            for (int j = 1; j < width; j++) {
+                for (int k = j-1; k > -1; k--) {
+
+                    if (overallGameBoard[i][k].getValue()!=0 && overallGameBoard[i][k].getValue() != overallGameBoard[i][j].getValue()) {
+                        break;
+                    }
+                    else if (overallGameBoard[i][k].getValue() == overallGameBoard[i][j].getValue()) {
+                        overallGameBoard[i][k].doubleValue();
+                        score += overallGameBoard[i][k].getValue();
+                        overallGameBoard[i][j].resetValue();
+                        piecesMoved = true;
+                    }
+                }
+            }
+        }
+
         for (int i = 1; i < height; i++) { // if you don't include this for loop, some stuff doesn't get combined
             for (int j = 0; j < width; j++) {
-                if (overallGameBoard[i-1][j].getValue()!=0) {
-                    if (overallGameBoard[i-1][j].getValue()==overallGameBoard[i][j].getValue()) { // if conditions for if side item is of equal value
-                        overallGameBoard[i-1][j].doubleValue();
-                        score += overallGameBoard[i-1][j].getValue();
+                for (int k = i-1; k > -1; k--) {
+                    if (overallGameBoard[k][j].getValue()!=0 && overallGameBoard[k][j].getValue() != overallGameBoard[i][j].getValue()) {
+                        break;
+                    }
+                    else if (overallGameBoard[k][j].getValue() == overallGameBoard[i][j].getValue()) {
+                        overallGameBoard[k][j].doubleValue();
+                        score += overallGameBoard[k][j].getValue();
                         overallGameBoard[i][j].resetValue();
                         piecesMoved = true;
                     }
@@ -170,6 +198,7 @@ public class GameBoard {
                         int value = overallGameBoard[i][j].getValue();
                         overallGameBoard[i][j].resetValue();
                         overallGameBoard[k][j].setValue(value);
+                        k++;
                         piecesMoved = true;
                         break;
                     }
@@ -186,10 +215,13 @@ public class GameBoard {
     public void dropDown() {
         for (int i = height-2; i > -1; i--) { // if you don't include this for loop, some stuff doesn't get combined
             for (int j = 0; j < width; j++) {
-                if (overallGameBoard[i+1][j].getValue()!=0) {
-                    if (overallGameBoard[i+1][j].getValue()==overallGameBoard[i][j].getValue()) { // if conditions for if side item is of equal value
-                        overallGameBoard[i+1][j].doubleValue();
-                        score += overallGameBoard[i+1][j].getValue();
+                for (int k = i+1; k < height; k++) {
+                    if (overallGameBoard[k][j].getValue()!=0 && overallGameBoard[k][j].getValue() != overallGameBoard[i][j].getValue()) {
+                        break;
+                    }
+                    else if (overallGameBoard[k][j].getValue() == overallGameBoard[i][j].getValue()) {
+                        overallGameBoard[k][j].doubleValue();
+                        score += overallGameBoard[k][j].getValue();
                         overallGameBoard[i][j].resetValue();
                         piecesMoved = true;
                     }
@@ -205,6 +237,7 @@ public class GameBoard {
                         int value = overallGameBoard[i][j].getValue();
                         overallGameBoard[i][j].resetValue();
                         overallGameBoard[k][j].setValue(value);
+                        k--;
                         piecesMoved = true;
                         break;
                     }

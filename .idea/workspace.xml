@@ -30,41 +30,41 @@
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="java" value="9811" />
+          <entry key="java" value="10534" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="JAVA" value="9811" />
+          <entry key="JAVA" value="10534" />
         </counts>
       </usages-collector>
     </session>
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/GameBoard.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="156">
-              <caret line="373" column="13" lean-forward="true" selection-start-line="373" selection-start-column="13" selection-end-line="373" selection-end-column="13" />
+            <state relative-caret-position="211">
+              <caret line="394" column="19" lean-forward="true" selection-start-line="394" selection-start-column="19" selection-end-line="394" selection-end-column="19" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#12213#12214#0" expanded="true" />
-                <element signature="e#12242#12243#0" expanded="true" />
-                <element signature="e#13587#13588#0" expanded="true" />
-                <element signature="e#13615#13616#0" expanded="true" />
-                <element signature="e#13649#13650#0" expanded="true" />
-                <element signature="e#13679#13680#0" expanded="true" />
+                <element signature="e#15359#15360#0" expanded="true" />
+                <element signature="e#15387#15388#0" expanded="true" />
+                <element signature="e#15416#15417#0" expanded="true" />
+                <element signature="e#15444#15445#0" expanded="true" />
+                <element signature="e#15474#15475#0" expanded="true" />
+                <element signature="e#15503#15504#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Gui2048.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="173">
-              <caret line="49" column="16" selection-start-line="49" selection-start-column="16" selection-end-line="49" selection-end-column="16" />
+            <state relative-caret-position="338">
+              <caret line="172" column="50" lean-forward="true" selection-start-line="172" selection-start-column="50" selection-end-line="172" selection-end-column="50" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -121,8 +121,8 @@
         <option value="$PROJECT_DIR$/src/rectangle.java" />
         <option value="$PROJECT_DIR$/src/Rectangle.java" />
         <option value="$PROJECT_DIR$/src/Square.java" />
-        <option value="$PROJECT_DIR$/src/GameBoard.java" />
         <option value="$PROJECT_DIR$/src/Gui2048.java" />
+        <option value="$PROJECT_DIR$/src/GameBoard.java" />
       </list>
     </option>
   </component>
@@ -152,7 +152,7 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1545101972467" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1545104526691" />
     <property name="com.intellij.ide.scratch.LRUPopupBuilder$1/New Scratch File" value="JAVA" />
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.0" />
@@ -171,7 +171,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Application.Gui2048">
+  <component name="RunManager" selected="Application.GameBoard">
     <configuration name="GameBoard" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="GameBoard" />
       <module name="2048" />
@@ -200,8 +200,8 @@
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.Gui2048" />
         <item itemvalue="Application.GameBoard" />
+        <item itemvalue="Application.Gui2048" />
         <item itemvalue="Application.Rectangle" />
       </list>
     </recent_temporary>
@@ -304,28 +304,28 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/GameBoard.java">
+    <entry file="file://$PROJECT_DIR$/src/Gui2048.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="156">
-          <caret line="373" column="13" lean-forward="true" selection-start-line="373" selection-start-column="13" selection-end-line="373" selection-end-column="13" />
+        <state relative-caret-position="338">
+          <caret line="172" column="50" lean-forward="true" selection-start-line="172" selection-start-column="50" selection-end-line="172" selection-end-column="50" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#12213#12214#0" expanded="true" />
-            <element signature="e#12242#12243#0" expanded="true" />
-            <element signature="e#13587#13588#0" expanded="true" />
-            <element signature="e#13615#13616#0" expanded="true" />
-            <element signature="e#13649#13650#0" expanded="true" />
-            <element signature="e#13679#13680#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Gui2048.java">
+    <entry file="file://$PROJECT_DIR$/src/GameBoard.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="173">
-          <caret line="49" column="16" selection-start-line="49" selection-start-column="16" selection-end-line="49" selection-end-column="16" />
+        <state relative-caret-position="211">
+          <caret line="394" column="19" lean-forward="true" selection-start-line="394" selection-start-column="19" selection-end-line="394" selection-end-column="19" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="e#15359#15360#0" expanded="true" />
+            <element signature="e#15387#15388#0" expanded="true" />
+            <element signature="e#15416#15417#0" expanded="true" />
+            <element signature="e#15444#15445#0" expanded="true" />
+            <element signature="e#15474#15475#0" expanded="true" />
+            <element signature="e#15503#15504#0" expanded="true" />
           </folding>
         </state>
       </provider>
