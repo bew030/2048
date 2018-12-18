@@ -118,28 +118,30 @@ public class Gui2048 extends Application {
   }
 
   private void colorBoard() {
-    for (int x = 1; x < HEIGHT; x++) {
+    for (int x = 0; x < HEIGHT; x++) {
       for (int y = 0; y < WIDTH; y++) {
         Rectangle newTile = new Rectangle();
         newTile.setWidth(100);
         newTile.setHeight(100);
 
         tiles[x][y] = newTile;
-        System.out.println("x: " + x);
-        System.out.println("y: " + y);
         tiles[x][y].setFill(replaceColor(copySquares[x][y].getValue()));
-        pane.add(tiles[x][y], x, y);
+        pane.add(tiles[x][y], x, y + 1);
 
         Text tileText = new Text();
         tileText.setText(copySquares[x][y].toString());
+        textNums[x][y] = tileText;
+        //System.out.println("x: " +  + ", y: " + textNums[x][y]);
+      }
+    }
+    for (int i = 0; i < HEIGHT; i++) {
+      for (int j = 0; j < WIDTH; j++) {
+        if (copySquares[i][j].getValue() != 0) {
+          pane.add(textNums[i][j], i, j + 1);
+          GridPane.setHalignment(textNums[i][j], HPos.CENTER);
+        }
 
-      /*  if (board.overallGameBoard[x - 1][y].getValue() != 0) {
-          //System.out.println(board.overallGameBoard[x - 1][y].getValue());
 
-          pane.add(textNums[x - 1][y], x, y);
-        }*/
-
-        //GridPane.setHalignment(textNums[x][y], HPos.CENTER);
       }
       }
   }
@@ -148,9 +150,9 @@ public class Gui2048 extends Application {
     clearGrid();
     copyBoard();
     //update score
-    textNums[WIDTH - 1][0].setText("Score: " + board.getScore());
-    textNums[WIDTH - 1][0].setFont(Font.font("Times New Roman", 20));
-    textNums[WIDTH - 1][0].setFill(Color.BLACK);
+    score.setText("Score: " + board.getScore());
+    score.setFont(Font.font("Times New Roman", 20));
+    score.setFill(Color.BLACK);
 
     //recolor board
     colorBoard();
@@ -170,25 +172,26 @@ public class Gui2048 extends Application {
     pane.setVgap(15);
 
     copySquares = new Square[board.getWidth()][board.getHeight()];
-    tiles = new Rectangle[HEIGHT + 1][WIDTH];
+    tiles = new Rectangle[HEIGHT][WIDTH];
     //deep copy Squares, create new array for text
     copyBoard();
-    textNums = new Text[HEIGHT + 1][WIDTH];
+    textNums = new Text[HEIGHT][WIDTH];
 
     //initialize game title and score headers
-    Text title = new Text();
+    title = new Text();
     title.setText("2048");
     title.setFont(Font.font("Times New Roman", 50));
     title.setFill(Color.BLACK);
-    Text score = new Text();
-    score.setText("Score: " + board.getScore());
-    textNums[HEIGHT - 1][0] = score;
-    textNums[HEIGHT - 1][0].setFont(Font.font("Times New Roman", 20));
-    textNums[HEIGHT- 1][0].setFill(Color.BLACK);
+    score = new Text();
+    score.setText("Score: " + 0);
+    score.setFont(Font.font("Times New Roman", 20));
+    score.setFill(Color.BLACK);
 
     pane.add(title, 0, 0);
     GridPane.setHalignment(title, HPos.LEFT);
-    pane.add(textNums[HEIGHT - 1][0], HEIGHT - 1, 0);
+    pane.add(score, WIDTH - 1, 0);
+    GridPane.setHalignment(score, HPos.RIGHT);
+    //pane.add();
     colorBoard();
     //updateFont();
 
