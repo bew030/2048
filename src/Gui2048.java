@@ -25,8 +25,8 @@ public class Gui2048 extends Application {
   private static final int HIGH_TEXT = 35;
 
   private GameBoard board;
-  private KeyHandler keyHandler;
   private GridPane pane;
+  private StackPane stack;
   private Rectangle[][] tiles;
   private Square[][] copySquares;
   private Text[][] textNums;
@@ -87,8 +87,71 @@ public class Gui2048 extends Application {
     }
   }
 
+  private void updateFont() {
+    for (int i = 0; i < textNums.length; i++) {
+      for (int j = 1; j < textNums[i].length; j++) {
+        if (board.overallGameBoard[y - 1][x] < 128) {
+          textNums[x][y].setFont((Font.font("Times New Roman",
+                         FontWeight.BOLD, LOW_TEXT)));
+        }
+        else if (board.overallGameBoard[y - 1][x] < 1024) {
+          textNums[x][y].setFont((Font.font("Times New Roman",
+                         FontWeight.BOLD, MID_TEXT)));
+        }
+        else {
+          textNums[x][y].setFont((Font.font("Times New Roman",
+                         FontWeight.BOLD, HIGH_TEXT)));
+        }
+      }
+    }
+  }
+
+  private void clearGrid() {
+    for (int i = 0; i < board.length; i++) {
+      for (int j = 0; j < board[i].length; j++) {
+        tiles.setFill(BACKGROUND);
+      }
+    }
+  }
+
+  private void colorBoard() {
+    for (int x = 0; x < WIDTH; x++) {
+      for (int y = 1; y < HEIGHT + 1; y++) {
+        Rectangle newTile = new Rectangle();
+        newTile.setWidth(100);
+        newTile.setHeight(100);
+
+        tiles[x][y] = newTile;
+        tiles[x][y].setFill(copySquares[x][y].getValue());
+        pane.add(tiles[x][y], x, y);
+
+        Text tileText = new Text();
+        tileText.setText(copySquares[x][y].toString());
+
+        if (board.overallGameBoard[y - 1][x].getValue() != 0) {
+          pane.add(textNums[x][y], x, y);
+        }
+
+        GridPane.setHalignment(textNums[x][y], HPos.CENTER);
+        }
+      }
+  }
+
+  private void update() {
+    clearGrid();
+    //update score
+    textNums[WIDTH - 1][0].setText("Score: " + board.getScore());
+    textNums[WIDTH - 1][0].setFont(Font.font("Times New Roman", 20));
+    textNums[WIDTH - 1][0].setFill(Color.BLACK);
+
+    //recolor board
+    colorBoard();
+    updateFont();
+  }
+
   @Override
   public void start(Stage primaryStage) {
+    this.board = new GameBoard();
     //create pane to hold visual representation of game
     pane = new GridPane();
     pane.setAlignment(Pos.CENTER);
@@ -117,26 +180,7 @@ public class Gui2048 extends Application {
     GridPane.setHalignment(title, HPos.LEFT);
     pane.add(textNums[WIDTH - 1][0], WIDTH - 1, 0);
 
-    for (int x = 0; x < WIDTH; x++) {
-      for (int y = 1; y < HEIGHT + 1; y++) {
-        Rectangle newTile = new Rectangle();
-        newTile.setWidth(100);
-        newTile.setHeight(100);
-
-        tiles[x][y] = newTile;
-        tiles[x][y].setFill(copySquares[x][y].getValue());
-        pane.add(tiles[x][y], x, y);
-
-        Text tileText = new Text();
-        tileText.setText(copySquares[x][y].toString());
-
-        if (board.overallGameBoard[y - 1][x].getValue() != 0) {
-          pane.add(textNums[x][y], x, y);
-        }
-
-        GridPane.setHalignment(textNums[x][y], HPos.CENTER);
-        }
-      }
+    updateFont();
 
       this.stack = new StackPane();
       stack.getChildren.addAll(pane);
@@ -155,6 +199,31 @@ public class Gui2048 extends Application {
   private class KeyHandler implements EventHandler<KeyEvent> {
     @Override
     public void handle(KeyEvent e) {
+      if (board.gameOver) {
+        return;
+      }
+      if (e.getCode() == KeyCode.LEFT) {
+        board.dropLeft();
+      }
+      else if (e.getCode() == KeyCode.RIGHT) {
+        board.dropRight();
+      }
+      else if (e.getCode() == KeyCode.DOWN) {
+        board.dropDown();
+      }
+      else if (e.getCode() == KeyCode.UP) {
+        board.dropUp();
+      }
+      else if (e.getCode() == KeyCode.Q) {
+        board.gameOver = true;
+      }
+
+      update(); //updates GUI after each move
+
+      //prints game over message
+      if (board.gameOver) {
+        title.setText("Game Over! Fuck you!");
+      }
 
     }
   }
