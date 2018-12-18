@@ -37,7 +37,7 @@ public class Gui2048 extends Application {
   private static Text title;
   private static Text score;
 
-/**
+
   private Color replaceColor(int value) {
     Color fillColor = null;
 
@@ -79,9 +79,9 @@ public class Gui2048 extends Application {
     }
     return fillColor;
   }
- **/
 
-/**
+
+
   //needs public for game board height and width
   private void copyBoard() {
     for (int i = 0; i < board.getWidth(); i++) {
@@ -91,18 +91,14 @@ public class Gui2048 extends Application {
     }
   }
 
- **/
-
-  /*private void updateFont() {
-    for (int i = 1; i < textNums.length; i++) {
+  private void updateFont() {
+    for (int i = 0; i < textNums.length; i++) {
       for (int j = 0; j < textNums[i].length; j++) {
-        if (board.overallGameBoard[i - 1][j].getValue() < 128) {
-          System.out.println("i: " + i);
-          System.out.println("j: " + j);
+        if (board.overallGameBoard[i][j].getValue() < 128) {
           textNums[i][j].setFont((Font.font("Times New Roman",
                          FontWeight.BOLD, LOW_TEXT)));
         }
-        else if (board.overallGameBoard[i - 1][j].getValue() < 1024) {
+        else if (board.overallGameBoard[i][j].getValue() < 1024) {
           textNums[i][j].setFont((Font.font("Times New Roman",
                          FontWeight.BOLD, MID_TEXT)));
         }
@@ -112,8 +108,8 @@ public class Gui2048 extends Application {
         }
       }
     }
-  }*/
-/**
+  }
+
   private void clearGrid() {
     for (int i = 0; i < board.overallGameBoard.length; i++) {
       for (int j = 0; j < board.overallGameBoard[i].length; j++) {
@@ -121,51 +117,45 @@ public class Gui2048 extends Application {
       }
     }
   }
- **/
 
-/**
   private void colorBoard() {
-    for (int x = 1; x < HEIGHT; x++) {
+    for (int x = 0; x < HEIGHT; x++) {
       for (int y = 0; y < WIDTH; y++) {
         Rectangle newTile = new Rectangle();
         newTile.setWidth(100);
         newTile.setHeight(100);
 
         tiles[x][y] = newTile;
-        System.out.println("x: " + x);
-        System.out.println("y: " + y);
         tiles[x][y].setFill(replaceColor(copySquares[x][y].getValue()));
-        pane.add(tiles[x][y], x, y);
+        pane.add(tiles[x][y], x, y + 1);
 
         Text tileText = new Text();
         tileText.setText(copySquares[x][y].toString());
-
-      /*  if (board.overallGameBoard[x - 1][y].getValue() != 0) {
-          //System.out.println(board.overallGameBoard[x - 1][y].getValue());
-
-          pane.add(textNums[x - 1][y], x, y);
-        }*/
-        /**
-        //GridPane.setHalignment(textNums[x][y], HPos.CENTER);
+        textNums[x][y] = tileText;
       }
+    }
+    for (int i = 0; i < HEIGHT; i++) {
+      for (int j = 0; j < WIDTH; j++) {
+        if (copySquares[i][j].getValue() != 0) {
+          pane.add(textNums[i][j], i, j + 1);
+          GridPane.setHalignment(textNums[i][j], HPos.CENTER);
+        }
       }
+    }
   }
-         **/
 
-        /**
   private void update() {
     clearGrid();
     copyBoard();
     //update score
-    textNums[WIDTH - 1][0].setText("Score: " + board.getScore());
-    textNums[WIDTH - 1][0].setFont(Font.font("Times New Roman", 20));
-    textNums[WIDTH - 1][0].setFill(Color.BLACK);
+    score.setText("Score: " + board.getScore());
+    score.setFont(Font.font("Times New Roman", 20));
+    score.setFill(Color.BLACK);
 
     //recolor board
-    //colorBoard();
-    //updateFont();
+    colorBoard();
+    updateFont();
   }
-         **/
 
   @Override
   public void start(Stage primaryStage) {
@@ -178,29 +168,28 @@ public class Gui2048 extends Application {
     //set spacing
     pane.setHgap(15);
     pane.setVgap(15);
-
-
-    copySquares = new Square[board.getHeight()][board.getWidth()];
-    tiles = new Rectangle[HEIGHT + 1][WIDTH];
+    copySquares = new Square[board.getWidth()][board.getHeight()];
+    tiles = new Rectangle[HEIGHT][WIDTH];
     //deep copy Squares, create new array for text
-    //copyBoard();
-    textNums = new Text[HEIGHT + 1][WIDTH]; // stores 2d array of text objects which carry the number
+    copyBoard();
+    textNums = new Text[HEIGHT][WIDTH];
 
     //initialize game title and score headers
-    Text title = new Text();
+    title = new Text();
     title.setText("2048");
     title.setFont(Font.font("Times New Roman", 50));
     title.setFill(Color.BLACK);
-    Text score = new Text();
-    score.setText("Score: " + board.getScore());
-    textNums[HEIGHT - 1][0] = score;
-    textNums[HEIGHT - 1][0].setFont(Font.font("Times New Roman", 20));
-    textNums[HEIGHT- 1][0].setFill(Color.BLACK);
+    score = new Text();
+    score.setText("Score: " + 0);
+    score.setFont(Font.font("Times New Roman", 20));
+    score.setFill(Color.BLACK);
 
     pane.add(title, 0, 0);
     GridPane.setHalignment(title, HPos.LEFT);
-    //pane.add(textNums[HEIGHT - 1][0], HEIGHT - 1, 0);
-    //colorBoard();
+    pane.add(score, WIDTH - 1, 0);
+    GridPane.setHalignment(score, HPos.RIGHT);
+    //pane.add();
+    colorBoard();
     //updateFont();
 
 
@@ -256,6 +245,7 @@ public class Gui2048 extends Application {
       //prints game over message
       if (board.gameOver) {
         title.setText("Game Over! Fuck you!");
+        GridPane.setHalignment(title, HPos.CENTER);
       }
 
     }
