@@ -116,8 +116,8 @@ public class Gui2048 extends Application {
   }
 
   private void colorBoard() {
-    for (int x = 0; x < WIDTH; x++) {
-      for (int y = 1; y < HEIGHT + 1; y++) {
+    for (int x = 1; x < HEIGHT + 1; x++) {
+      for (int y = 0; y < WIDTH; y++) {
         Rectangle newTile = new Rectangle();
         newTile.setWidth(100);
         newTile.setHeight(100);
@@ -129,12 +129,14 @@ public class Gui2048 extends Application {
         Text tileText = new Text();
         tileText.setText(copySquares[x][y].toString());
 
-        if (board.overallGameBoard[y - 1][x].getValue() != 0) {
-          pane.add(textNums[x][y], x, y);
-        }
+      /*  if (board.overallGameBoard[x - 1][y].getValue() != 0) {
+          //System.out.println(board.overallGameBoard[x - 1][y].getValue());
 
-        GridPane.setHalignment(textNums[x][y], HPos.CENTER);
-        }
+          pane.add(textNums[x - 1][y], x, y);
+        }*/
+
+        //GridPane.setHalignment(textNums[x][y], HPos.CENTER);
+      }
       }
   }
 
@@ -163,6 +165,8 @@ public class Gui2048 extends Application {
     pane.setHgap(15);
     pane.setVgap(15);
 
+    copySquares = new Square[board.getWidth()][board.getHeight()];
+    tiles = new Rectangle[WIDTH][HEIGHT + 1];
     //deep copy Squares, create new array for text
     copyBoard();
     textNums = new Text[WIDTH][HEIGHT + 1];
