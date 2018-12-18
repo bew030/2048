@@ -81,9 +81,10 @@ public class GameBoard {
 
     public void dropLeft() {
         for (int i = 0; i < height; i++) { // if you don't include this for loop, some stuff doesn't get combined
+            int endCoord = -1;
             for (int j = 1; j < width; j++) {
-                for (int k = j-1; k > -1; k--) {
-                    if (overallGameBoard[i][k].getValue()!=0 && overallGameBoard[i][k].getValue() != overallGameBoard[i][j].getValue()) {
+                for (int k = j-1; k > endCoord; k--) {
+                    if (overallGameBoard[i][k].getValue()!=0 && (overallGameBoard[i][k].getValue() != overallGameBoard[i][j].getValue())) {
                         break;
                     }
                     else if (overallGameBoard[i][k].getValue() == overallGameBoard[i][j].getValue()) {
@@ -93,6 +94,7 @@ public class GameBoard {
                             maxNumber = overallGameBoard[i][k].getValue();
                         }
                         overallGameBoard[i][j].resetValue();
+                        endCoord = k;
                         piecesMoved = true;
                     }
                 }
@@ -122,8 +124,9 @@ public class GameBoard {
 
     public void dropRight() {
         for (int i = 0; i < height; i++) { // if you don't include this for loop, some stuff doesn't get combined
+            int endCoord = width;
             for (int j = width-2; j > -1; j--) { // doublecheck width-2
-                for (int k = j+1; k < width; k++) {
+                for (int k = j+1; k < endCoord; k++) {
                     if (overallGameBoard[i][k].getValue()!=0 && overallGameBoard[i][k].getValue() != overallGameBoard[i][j].getValue()) {
                         break;
                     }
@@ -134,6 +137,7 @@ public class GameBoard {
                             maxNumber = overallGameBoard[i][k].getValue();
                         }
                         overallGameBoard[i][j].resetValue();
+                        endCoord = k;
                         piecesMoved = true;
                     }
                 }
@@ -163,9 +167,10 @@ public class GameBoard {
     }
 
     public void dropUp() {
-        for (int i = 1; i < height; i++) { // if you don't include this for loop, some stuff doesn't get combined
-            for (int j = 0; j < width; j++) {
-                for (int k = i-1; k > -1; k--) {
+        for (int j = 0; j < width; j++) { // if you don't include this for loop, some stuff doesn't get combined
+            int endCoord = -1;
+            for (int i = 1; i < height; i++) {
+                for (int k = i-1; k > endCoord; k--) {
                     if (overallGameBoard[k][j].getValue()!=0 && overallGameBoard[k][j].getValue() != overallGameBoard[i][j].getValue()) {
                         break;
                     }
@@ -176,6 +181,7 @@ public class GameBoard {
                             maxNumber = overallGameBoard[k][j].getValue();
                         }
                         overallGameBoard[i][j].resetValue();
+                        endCoord = k;
                         piecesMoved = true;
                     }
                 }
@@ -204,10 +210,12 @@ public class GameBoard {
         }
     }
 
+
     public void dropDown() {
-        for (int i = height-2; i > -1; i--) { // if you don't include this for loop, some stuff doesn't get combined
-            for (int j = 0; j < width; j++) {
-                for (int k = i+1; k < height; k++) {
+        for (int j = 0; j < width; j++) { // if you don't include this for loop, some stuff doesn't get combined
+            int endCoord = height;
+            for (int i = height-2; i > -1; i--) {
+                for (int k = i+1; k < endCoord; k++) {
                     if (overallGameBoard[k][j].getValue()!=0 && overallGameBoard[k][j].getValue() != overallGameBoard[i][j].getValue()) {
                         break;
                     }
@@ -218,6 +226,7 @@ public class GameBoard {
                             maxNumber = overallGameBoard[k][j].getValue();
                         }
                         overallGameBoard[i][j].resetValue();
+                        endCoord = k;
                         piecesMoved = true;
                     }
                 }
