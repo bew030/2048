@@ -8,6 +8,7 @@ public class GameBoard {
     public int score;
     public int width;
     public int height;
+    public boolean gameOver;
     final int DEFAULT_HEIGHT = 4;
     final int DEFAULT_WIDTH = 4;
     //private ArrayList<int[]> occupiedCoordinates;
@@ -33,6 +34,7 @@ public class GameBoard {
         piecesMoved = false;
         combinedAlready = false;
         score = 0;
+        gameOver = false;
     }
 
     public GameBoard(int x, int y) {
@@ -52,6 +54,7 @@ public class GameBoard {
         piecesMoved = false;
         combinedAlready = false;
         score = 0;
+        gameOver = false;
     }
 
     public GameBoard(int aVal, int[] a, int bVal, int[] b) {
@@ -71,6 +74,7 @@ public class GameBoard {
         piecesMoved = false;
         combinedAlready = false;
         score = 0;
+        gameOver = false;
     }
 
     public void dropLeft() {

@@ -27,6 +27,7 @@ public class Gui2048 extends Application {
   private GameBoard board;
   private GridPane pane;
   private StackPane stack;
+  private Scene scene;
   private Rectangle[][] tiles;
   private Square[][] copySquares;
   private Text[][] textNums;
@@ -80,8 +81,8 @@ public class Gui2048 extends Application {
 
   //needs public for game board height and width
   private void copyBoard() {
-    for (int i = 0; i < board.overallGameBoard.getWidth(); i++) {
-      for (int j = 0; j < board.overallGameBoard.getHeight(); j++) {
+    for (int i = 0; i < board.getWidth(); i++) {
+      for (int j = 0; j < board.getHeight(); j++) {
         copySquares[i][j] = board.overallGameBoard[i][j];
       }
     }
@@ -90,16 +91,16 @@ public class Gui2048 extends Application {
   private void updateFont() {
     for (int i = 0; i < textNums.length; i++) {
       for (int j = 1; j < textNums[i].length; j++) {
-        if (board.overallGameBoard[y - 1][x] < 128) {
-          textNums[x][y].setFont((Font.font("Times New Roman",
+        if (board.overallGameBoard[j - 1][i].getValue() < 128) {
+          textNums[i][j].setFont((Font.font("Times New Roman",
                          FontWeight.BOLD, LOW_TEXT)));
         }
-        else if (board.overallGameBoard[y - 1][x] < 1024) {
-          textNums[x][y].setFont((Font.font("Times New Roman",
+        else if (board.overallGameBoard[j - 1][i].getValue() < 1024) {
+          textNums[i][j].setFont((Font.font("Times New Roman",
                          FontWeight.BOLD, MID_TEXT)));
         }
         else {
-          textNums[x][y].setFont((Font.font("Times New Roman",
+          textNums[i][j].setFont((Font.font("Times New Roman",
                          FontWeight.BOLD, HIGH_TEXT)));
         }
       }
@@ -107,9 +108,9 @@ public class Gui2048 extends Application {
   }
 
   private void clearGrid() {
-    for (int i = 0; i < board.length; i++) {
-      for (int j = 0; j < board[i].length; j++) {
-        tiles.setFill(BACKGROUND);
+    for (int i = 0; i < board.overallGameBoard.length; i++) {
+      for (int j = 0; j < board.overallGameBoard[i].length; j++) {
+        tiles[i][j].setFill(BACKGROUND);
       }
     }
   }
@@ -122,7 +123,7 @@ public class Gui2048 extends Application {
         newTile.setHeight(100);
 
         tiles[x][y] = newTile;
-        tiles[x][y].setFill(copySquares[x][y].getValue());
+        tiles[x][y].setFill(replaceColor(copySquares[x][y].getValue()));
         pane.add(tiles[x][y], x, y);
 
         Text tileText = new Text();
@@ -156,7 +157,7 @@ public class Gui2048 extends Application {
     //create pane to hold visual representation of game
     pane = new GridPane();
     pane.setAlignment(Pos.CENTER);
-    pane.setPadding(new Insets(11.5, 12.5, 13.5, 14.5))
+    pane.setPadding(new Insets(11.5, 12.5, 13.5, 14.5));
     pane.setStyle("-fx-background-color: rgb(187, 173, 160)");
     //set spacing
     pane.setHgap(15);
@@ -172,7 +173,7 @@ public class Gui2048 extends Application {
     title.setFont(Font.font("Times New Roman", 50));
     title.setFill(Color.BLACK);
     Text score = new Text();
-    score.setText("Score: " + board.getScore()); needs getScore method in GB class
+    score.setText("Score: " + board.getScore());
     textNums[WIDTH - 1][0] = score;
     textNums[WIDTH - 1][0].setFont(Font.font("Times New Roman", 20));
     textNums[WIDTH - 1][0].setFill(Color.BLACK);
@@ -184,7 +185,7 @@ public class Gui2048 extends Application {
     updateFont();
 
     this.stack = new StackPane();
-    stack.getChildren.addAll(pane);
+    stack.getChildren().addAll(pane);
 
     this.scene = new Scene(stack);
     scene.setOnKeyPressed(new KeyHandler());
@@ -203,15 +204,27 @@ public class Gui2048 extends Application {
       }
       if (e.getCode() == KeyCode.LEFT) {
         board.dropLeft();
+        if (board.gameOver()) {
+          board.gameOver = true;
+        }
       }
       else if (e.getCode() == KeyCode.RIGHT) {
         board.dropRight();
+        if (board.gameOver()) {
+          board.gameOver = true;
+        }
       }
       else if (e.getCode() == KeyCode.DOWN) {
         board.dropDown();
+        if (board.gameOver()) {
+          board.gameOver = true;
+        }
       }
       else if (e.getCode() == KeyCode.UP) {
         board.dropUp();
+        if (board.gameOver()) {
+          board.gameOver = true;
+        }
       }
       else if (e.getCode() == KeyCode.Q) {
         board.gameOver = true;
