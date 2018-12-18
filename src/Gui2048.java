@@ -14,6 +14,7 @@ import java.io.*;
 
 
 public class Gui2048 extends Application {
+
   private static final int PADDING = 10;
   private static final int TILE_GAP = 2;
   private static final int WIDTH = 4;
@@ -80,6 +81,7 @@ public class Gui2048 extends Application {
   }
 
 
+
   //needs public for game board height and width
   private void copyBoard() {
     for (int i = 0; i < board.getWidth(); i++) {
@@ -142,7 +144,6 @@ public class Gui2048 extends Application {
     }
   }
 
-
   private void update() {
     clearGrid();
     copyBoard();
@@ -167,8 +168,6 @@ public class Gui2048 extends Application {
     //set spacing
     pane.setHgap(15);
     pane.setVgap(15);
-
-
     copySquares = new Square[board.getWidth()][board.getHeight()];
     tiles = new Rectangle[HEIGHT][WIDTH];
     //deep copy Squares, create new array for text
@@ -192,17 +191,19 @@ public class Gui2048 extends Application {
     colorBoard();
     updateFont();
 
+
     this.stack = new StackPane();
     stack.getChildren().addAll(pane);
 
     this.scene = new Scene(stack);
-    scene.setOnKeyPressed(new KeyHandler());
+    //scene.setOnKeyPressed(new KeyHandler());
 
     primaryStage.setTitle("2048");
     primaryStage.setScene(scene);
     primaryStage.show();
     }
 
+    /**
 
   private class KeyHandler implements EventHandler<KeyEvent> {
     @Override
@@ -249,5 +250,5 @@ public class Gui2048 extends Application {
     }
   }
 
-
+**/
 }
