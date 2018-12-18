@@ -90,15 +90,13 @@ public class Gui2048 extends Application {
   }
 
   private void updateFont() {
-    for (int i = 1; i < textNums.length; i++) {
+    for (int i = 0; i < textNums.length; i++) {
       for (int j = 0; j < textNums[i].length; j++) {
-        if (board.overallGameBoard[i - 1][j].getValue() < 128) {
-          System.out.println("i: " + i);
-          System.out.println("j: " + j);
+        if (board.overallGameBoard[i][j].getValue() < 128) {
           textNums[i][j].setFont((Font.font("Times New Roman",
                          FontWeight.BOLD, LOW_TEXT)));
         }
-        else if (board.overallGameBoard[i - 1][j].getValue() < 1024) {
+        else if (board.overallGameBoard[i][j].getValue() < 1024) {
           textNums[i][j].setFont((Font.font("Times New Roman",
                          FontWeight.BOLD, MID_TEXT)));
         }
@@ -132,7 +130,6 @@ public class Gui2048 extends Application {
         Text tileText = new Text();
         tileText.setText(copySquares[x][y].toString());
         textNums[x][y] = tileText;
-        //System.out.println("x: " +  + ", y: " + textNums[x][y]);
       }
     }
     for (int i = 0; i < HEIGHT; i++) {
@@ -141,10 +138,8 @@ public class Gui2048 extends Application {
           pane.add(textNums[i][j], i, j + 1);
           GridPane.setHalignment(textNums[i][j], HPos.CENTER);
         }
-
-
       }
-      }
+    }
   }
 
 
@@ -249,6 +244,7 @@ public class Gui2048 extends Application {
       //prints game over message
       if (board.gameOver) {
         title.setText("Game Over! Fuck you!");
+        GridPane.setHalignment(title, HPos.CENTER);
       }
 
     }
