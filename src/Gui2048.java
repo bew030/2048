@@ -79,6 +79,7 @@ public class Gui2048 extends Application {
     return fillColor;
   }
 
+
   //needs public for game board height and width
   private void copyBoard() {
     for (int i = 0; i < board.getWidth(); i++) {
@@ -88,7 +89,7 @@ public class Gui2048 extends Application {
     }
   }
 
-  /*private void updateFont() {
+  private void updateFont() {
     for (int i = 1; i < textNums.length; i++) {
       for (int j = 0; j < textNums[i].length; j++) {
         if (board.overallGameBoard[i - 1][j].getValue() < 128) {
@@ -107,7 +108,7 @@ public class Gui2048 extends Application {
         }
       }
     }
-  }*/
+  }
 
   private void clearGrid() {
     for (int i = 0; i < board.overallGameBoard.length; i++) {
@@ -146,6 +147,7 @@ public class Gui2048 extends Application {
       }
   }
 
+
   private void update() {
     clearGrid();
     copyBoard();
@@ -156,7 +158,7 @@ public class Gui2048 extends Application {
 
     //recolor board
     colorBoard();
-    //updateFont();
+    updateFont();
   }
 
   @Override
@@ -170,6 +172,7 @@ public class Gui2048 extends Application {
     //set spacing
     pane.setHgap(15);
     pane.setVgap(15);
+
 
     copySquares = new Square[board.getWidth()][board.getHeight()];
     tiles = new Rectangle[HEIGHT][WIDTH];
