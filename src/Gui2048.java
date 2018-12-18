@@ -195,8 +195,6 @@ public class Gui2048 extends Application {
     }
 
 
-  }
-
   private class KeyHandler implements EventHandler<KeyEvent> {
     @Override
     public void handle(KeyEvent e) {
