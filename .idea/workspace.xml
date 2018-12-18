@@ -152,7 +152,7 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1545105549872" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1545106912603" />
     <property name="com.intellij.ide.scratch.LRUPopupBuilder$1/New Scratch File" value="JAVA" />
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.0" />
@@ -171,7 +171,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Application.GameBoard">
+  <component name="RunManager" selected="Application.Gui2048">
     <configuration name="GameBoard" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="GameBoard" />
       <module name="2048" />
@@ -200,8 +200,8 @@
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.GameBoard" />
         <item itemvalue="Application.Gui2048" />
+        <item itemvalue="Application.GameBoard" />
         <item itemvalue="Application.Rectangle" />
       </list>
     </recent_temporary>
