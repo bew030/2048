@@ -299,13 +299,13 @@ public class GameBoard {
                         }
                     }
                     // check up condition
-                    else if ((i-1)>0) {
+                    else if ((i-1)>-1) {
                         if (overallGameBoard[i-1][j].getValue()==overallGameBoard[i][j].getValue()) {
                             return false;
                         }
                     }
                     // check down condition
-                    else if ((i+1)<height) {
+                    else if ((i+1)<height+1) {
                         if (overallGameBoard[i+1][j].getValue()==overallGameBoard[i][j].getValue()) {
                             return false;
                         }
