@@ -11,7 +11,7 @@ public class Square {
     }
 
     public void setValue(int addOn) {
-        intValue+= addOn;
+        intValue = addOn;
     }
 
     public int getValue() {
