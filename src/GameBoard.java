@@ -1,6 +1,7 @@
 import java.util.Arrays;
 import java.util.ArrayList;
 import java.util.Random;
+import java.util.Scanner;
 
 public class GameBoard {
     public Square[][] overallGameBoard;
@@ -352,5 +353,36 @@ public class GameBoard {
 
     public int getHeight() {
         return height;
+    }
+
+    public static void main(String[] args) {
+        Scanner scan = new Scanner(System.in);
+        System.out.println("Welcome to twenty-fort-neight. WASD controls. Good Luck!");
+        GameBoard testerBoard = new GameBoard();
+        while (!testerBoard.gameOver()) {
+            System.out.println("Score: " + testerBoard.getScore());
+            testerBoard.printViewer();
+            String command = scan.nextLine();
+            if (command.equals("w")) {
+                testerBoard.dropUp();
+            }
+            else if (command.equals("a")) {
+                testerBoard.dropLeft();
+            }
+            else if (command.equals("s")) {
+                testerBoard.dropDown();
+            }
+            else if (command.equals("d")) {
+                testerBoard.dropRight();
+            }
+            else if (command.equals("q")) {
+                break;
+            }
+            else {
+                System.out.println("ERROR: Wrong input. Try again!");
+            }
+            System.out.println();
+        }
+        System.out.println("GAME OVER. Final score: "+testerBoard.getScore());
     }
 }

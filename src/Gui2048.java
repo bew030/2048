@@ -14,6 +14,7 @@ import java.io.*;
 
 
 public class Gui2048 extends Application {
+
   private static final int PADDING = 10;
   private static final int TILE_GAP = 2;
   private static final int WIDTH = 4;
@@ -80,6 +81,7 @@ public class Gui2048 extends Application {
   }
  **/
 
+/**
   //needs public for game board height and width
   private void copyBoard() {
     for (int i = 0; i < board.getWidth(); i++) {
@@ -88,6 +90,8 @@ public class Gui2048 extends Application {
       }
     }
   }
+
+ **/
 
   /*private void updateFont() {
     for (int i = 1; i < textNums.length; i++) {
@@ -109,7 +113,7 @@ public class Gui2048 extends Application {
       }
     }
   }*/
-
+/**
   private void clearGrid() {
     for (int i = 0; i < board.overallGameBoard.length; i++) {
       for (int j = 0; j < board.overallGameBoard[i].length; j++) {
@@ -117,6 +121,8 @@ public class Gui2048 extends Application {
       }
     }
   }
+ **/
+
 /**
   private void colorBoard() {
     for (int x = 1; x < HEIGHT; x++) {
@@ -146,6 +152,7 @@ public class Gui2048 extends Application {
   }
          **/
 
+        /**
   private void update() {
     clearGrid();
     copyBoard();
@@ -158,6 +165,7 @@ public class Gui2048 extends Application {
     //colorBoard();
     //updateFont();
   }
+         **/
 
   @Override
   public void start(Stage primaryStage) {
@@ -172,11 +180,11 @@ public class Gui2048 extends Application {
     pane.setVgap(15);
 
 
-    copySquares = new Square[board.getWidth()][board.getHeight()];
+    copySquares = new Square[board.getHeight()][board.getWidth()];
     tiles = new Rectangle[HEIGHT + 1][WIDTH];
     //deep copy Squares, create new array for text
-    copyBoard();
-    textNums = new Text[HEIGHT + 1][WIDTH];
+    //copyBoard();
+    textNums = new Text[HEIGHT + 1][WIDTH]; // stores 2d array of text objects which carry the number
 
     //initialize game title and score headers
     Text title = new Text();
@@ -191,21 +199,23 @@ public class Gui2048 extends Application {
 
     pane.add(title, 0, 0);
     GridPane.setHalignment(title, HPos.LEFT);
-    pane.add(textNums[HEIGHT - 1][0], HEIGHT - 1, 0);
+    //pane.add(textNums[HEIGHT - 1][0], HEIGHT - 1, 0);
     //colorBoard();
     //updateFont();
+
 
     this.stack = new StackPane();
     stack.getChildren().addAll(pane);
 
     this.scene = new Scene(stack);
-    scene.setOnKeyPressed(new KeyHandler());
+    //scene.setOnKeyPressed(new KeyHandler());
 
     primaryStage.setTitle("2048");
     primaryStage.setScene(scene);
     primaryStage.show();
     }
 
+    /**
 
   private class KeyHandler implements EventHandler<KeyEvent> {
     @Override
@@ -251,5 +261,5 @@ public class Gui2048 extends Application {
     }
   }
 
-
+**/
 }
