@@ -3,18 +3,18 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class GameBoard {
-    private Square[][] overallGameBoard;
-    private ArrayList<int[]> unoccupiedCoordinates;
-    private int score;
-    private int width;
-    private int height;
+    public Square[][] overallGameBoard;
+    public ArrayList<int[]> unoccupiedCoordinates;
+    public int score;
+    public int width;
+    public int height;
     final int DEFAULT_HEIGHT = 4;
     final int DEFAULT_WIDTH = 4;
     //private ArrayList<int[]> occupiedCoordinates;
     boolean piecesMoved;
     boolean combinedAlready;
-    private int[] possibleGeneratedValue = new int[]{2,4}; // odds of 2 are 90%, odds of 4 are 10%
-    private Random rand = new Random();
+    public int[] possibleGeneratedValue = new int[]{2,4}; // odds of 2 are 90%, odds of 4 are 10%
+    public Random rand = new Random();
 
     public GameBoard() {
         unoccupiedCoordinates = new ArrayList<int[]>();
