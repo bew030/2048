@@ -6,6 +6,10 @@ public class GameBoard {
     private Square[][] overallGameBoard;
     private ArrayList<int[]> unoccupiedCoordinates;
     private int score;
+    private int width;
+    private int height;
+    final int DEFAULT_HEIGHT = 4;
+    final int DEFAULT_WIDTH = 4;
     //private ArrayList<int[]> occupiedCoordinates;
     boolean piecesMoved;
     boolean combinedAlready;
@@ -14,10 +18,31 @@ public class GameBoard {
 
     public GameBoard() {
         unoccupiedCoordinates = new ArrayList<int[]>();
+        width = DEFAULT_WIDTH;
+        height = DEFAULT_HEIGHT;
         //occupiedCoordinates = new ArrayList<int[]>();
-        overallGameBoard = new Square[4][4];
-        for (int i = 0; i < 4; i++) {
-            for (int j = 0; j < 4; j++) {
+        overallGameBoard = new Square[height][width];
+        for (int i = 0; i < height; i++) {
+            for (int j = 0; j < width; j++) {
+                overallGameBoard[i][j] = new Square();
+            }
+        }
+        updateUnoccupied();
+        generateRandomPiece();
+        generateRandomPiece();
+        piecesMoved = false;
+        combinedAlready = false;
+        score = 0;
+    }
+
+    public GameBoard(int x, int y) {
+        unoccupiedCoordinates = new ArrayList<int[]>();
+        width = x;
+        height = y;
+        //occupiedCoordinates = new ArrayList<int[]>();
+        overallGameBoard = new Square[height][width];
+        for (int i = 0; i < height; i++) {
+            for (int j = 0; j < width; j++) {
                 overallGameBoard[i][j] = new Square();
             }
         }
@@ -32,9 +57,11 @@ public class GameBoard {
     public GameBoard(int aVal, int[] a, int bVal, int[] b) {
         unoccupiedCoordinates = new ArrayList<int[]>();
         //occupiedCoordinates = new ArrayList<int[]>();
-        overallGameBoard = new Square[4][4];
-        for (int i = 0; i < 4; i++) {
-            for (int j = 0; j < 4; j++) {
+        width = DEFAULT_WIDTH;
+        height = DEFAULT_HEIGHT;
+        overallGameBoard = new Square[height][width];
+        for (int i = 0; i < height; i++) {
+            for (int j = 0; j < width; j++) {
                 overallGameBoard[i][j] = new Square();
             }
         }
@@ -47,8 +74,8 @@ public class GameBoard {
     }
 
     public void dropLeft() {
-        for (int i = 0; i < 4; i++) { // if you don't include this for loop, some stuff doesn't get combined
-            for (int j = 1; j < 4; j++) {
+        for (int i = 0; i < height; i++) { // if you don't include this for loop, some stuff doesn't get combined
+            for (int j = 1; j < width; j++) {
                 if (overallGameBoard[i][j-1].getValue()!=0) {
                     if (overallGameBoard[i][j-1].getValue()==overallGameBoard[i][j].getValue()) { // if conditions for if side item is of equal value
                         overallGameBoard[i][j-1].doubleValue();
@@ -59,8 +86,8 @@ public class GameBoard {
                 }
             }
         }
-        for (int i = 0; i < 4; i++) { // row iterator
-            for (int j = 1; j < 4; j++) { // column iterator
+        for (int i = 0; i < height; i++) { // row iterator
+            for (int j = 1; j < width; j++) { // column iterator
                 for (int k = 0; k < j; k++) { // loops all items in front
                     if (overallGameBoard[i][j].getValue()!=0 && overallGameBoard[i][k].getValue()==0) {
                         int[] newOccupiedSpace = new int[]{i,k};
@@ -82,8 +109,8 @@ public class GameBoard {
     }
 
     public void dropRight() {
-        for (int i = 0; i < 4; i++) { // if you don't include this for loop, some stuff doesn't get combined
-            for (int j = 2; j > -1; j--) {
+        for (int i = 0; i < height; i++) { // if you don't include this for loop, some stuff doesn't get combined
+            for (int j = width-2; j > -1; j--) { // doublecheck width-2
                 if (overallGameBoard[i][j+1].getValue()!=0) {
                     if (overallGameBoard[i][j+1].getValue()==overallGameBoard[i][j].getValue()) { // if conditions for if side item is of equal value
                         overallGameBoard[i][j+1].doubleValue();
@@ -94,8 +121,8 @@ public class GameBoard {
                 }
             }
         }
-        for (int i = 0; i < 4; i++) { // row iterator
-            for (int j = 2; j > -1; j--) { // column iterator
+        for (int i = 0; i < height; i++) { // row iterator
+            for (int j = width-2; j > -1; j--) { // column iterator, double check width-2
                 for (int k = 3; k > j; k--) { // loops all items in front
                     if (overallGameBoard[i][j].getValue()!=0 && overallGameBoard[i][k].getValue()==0) {
                         int[] newOccupiedSpace = new int[]{i,k};
@@ -117,8 +144,8 @@ public class GameBoard {
     }
 
     public void dropUp() {
-        for (int i = 1; i < 4; i++) { // if you don't include this for loop, some stuff doesn't get combined
-            for (int j = 0; j < 4; j++) {
+        for (int i = 1; i < height; i++) { // if you don't include this for loop, some stuff doesn't get combined
+            for (int j = 0; j < width; j++) {
                 if (overallGameBoard[i-1][j].getValue()!=0) {
                     if (overallGameBoard[i-1][j].getValue()==overallGameBoard[i][j].getValue()) { // if conditions for if side item is of equal value
                         overallGameBoard[i-1][j].doubleValue();
@@ -129,8 +156,8 @@ public class GameBoard {
                 }
             }
         }
-        for (int i = 1; i < 4; i++) { // row iterator
-            for (int j = 0; j < 4; j++) { // column iterator
+        for (int i = 1; i < height; i++) { // row iterator
+            for (int j = 0; j < width; j++) { // column iterator
                 for (int k = 0; k < i; k++) { // loops all items in front
                     if (overallGameBoard[i][j].getValue()!=0 && overallGameBoard[k][j].getValue()==0) {
                         int[] newOccupiedSpace = new int[]{k,j};
@@ -152,8 +179,8 @@ public class GameBoard {
     }
 
     public void dropDown() {
-        for (int i = 2; i > -1; i--) { // if you don't include this for loop, some stuff doesn't get combined
-            for (int j = 0; j < 4; j++) {
+        for (int i = height-2; i > -1; i--) { // if you don't include this for loop, some stuff doesn't get combined
+            for (int j = 0; j < width; j++) {
                 if (overallGameBoard[i+1][j].getValue()!=0) {
                     if (overallGameBoard[i+1][j].getValue()==overallGameBoard[i][j].getValue()) { // if conditions for if side item is of equal value
                         overallGameBoard[i+1][j].doubleValue();
@@ -164,9 +191,9 @@ public class GameBoard {
                 }
             }
         }
-        for (int i = 2; i > -1; i--) { // row iterator
-            for (int j = 0; j < 4; j++) { // column iterator
-                for (int k = 3; k > i; k--) { // loops all items in front
+        for (int i = height-2; i > -1; i--) { // row iterator
+            for (int j = 0; j < width; j++) { // column iterator
+                for (int k = height-1; k > i; k--) { // loops all items in front
                     if (overallGameBoard[i][j].getValue()!=0 && overallGameBoard[k][j].getValue()==0) {
                         int[] newOccupiedSpace = new int[]{k,j};
                         int[] prevLoc = new int[]{overallGameBoard[i][j].getxCoord(),overallGameBoard[i][j].getyCoord()};
@@ -187,8 +214,8 @@ public class GameBoard {
     }
 
     public void updateUnoccupied() {
-        for (int i = 0; i < 4; i++) {
-            for (int j = 0; j < 4; j++) {
+        for (int i = 0; i < height; i++) {
+            for (int j = 0; j < width; j++) {
                 int[] coordinates = new int[]{i,j};
                 if (contains(unoccupiedCoordinates,coordinates) && overallGameBoard[i][j].getValue()!=0) {
                     //System.out.println("removed");
@@ -207,8 +234,8 @@ public class GameBoard {
             return false;
         }
         else {
-            for (int i = 0; i < 4; i++) { // row iterator
-                for (int j = 0; j < 4; j++) { // column iterator
+            for (int i = 0; i < height; i++) { // row iterator
+                for (int j = 0; j < width; j++) { // column iterator
                     // check left condition
                     if ((j-1)>0) {
                         if (overallGameBoard[i][j-1].getValue()==overallGameBoard[i][j].getValue()) {
@@ -216,7 +243,7 @@ public class GameBoard {
                         }
                     }
                     // check right condition
-                    else if ((j+1)<4) {
+                    else if ((j+1)<width) {
                         if (overallGameBoard[i][j+1].getValue()==overallGameBoard[i][j].getValue()) {
                             return false;
                         }
@@ -228,7 +255,7 @@ public class GameBoard {
                         }
                     }
                     // check down condition
-                    else if ((i+1)<4) {
+                    else if ((i+1)<height) {
                         if (overallGameBoard[i+1][j].getValue()==overallGameBoard[i][j].getValue()) {
                             return false;
                         }
@@ -313,6 +340,14 @@ public class GameBoard {
 
     public int getScore() {
         return score;
+    }
+
+    public int getWidth() {
+        return width;
+    }
+
+    public int getHeight() {
+        return height;
     }
 
     public static void main(String[] args) {
