@@ -400,7 +400,9 @@ public class GameBoard {
         return height;
     }
 
+
     public static void main(String[] args) {
+        /**
         Scanner scan = new Scanner(System.in);
         System.out.println("Welcome to twenty-fort-neight. WASD controls. Good Luck!");
         GameBoard testerBoard = new GameBoard();
@@ -432,5 +434,6 @@ public class GameBoard {
             System.out.println();
         }
         System.out.println("GAME OVER. Final score: "+testerBoard.getScore());
+         **/
     }
 }
