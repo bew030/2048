@@ -36,7 +36,7 @@ public class Gui2048 extends Application {
   private static Text title;
   private static Text score;
 
-
+/**
   private Color replaceColor(int value) {
     Color fillColor = null;
 
@@ -78,6 +78,7 @@ public class Gui2048 extends Application {
     }
     return fillColor;
   }
+ **/
 
   //needs public for game board height and width
   private void copyBoard() {
@@ -114,7 +115,7 @@ public class Gui2048 extends Application {
       }
     }
   }
-
+/**
   private void colorBoard() {
     for (int x = 1; x < HEIGHT + 1; x++) {
       for (int y = 0; y < WIDTH; y++) {
@@ -134,11 +135,12 @@ public class Gui2048 extends Application {
 
           pane.add(textNums[x - 1][y], x, y);
         }*/
-
+        /**
         //GridPane.setHalignment(textNums[x][y], HPos.CENTER);
       }
       }
   }
+         **/
 
   private void update() {
     clearGrid();
@@ -149,7 +151,7 @@ public class Gui2048 extends Application {
     textNums[WIDTH - 1][0].setFill(Color.BLACK);
 
     //recolor board
-    colorBoard();
+    //colorBoard();
     updateFont();
   }
 
@@ -164,6 +166,7 @@ public class Gui2048 extends Application {
     //set spacing
     pane.setHgap(15);
     pane.setVgap(15);
+
 
     copySquares = new Square[board.getWidth()][board.getHeight()];
     tiles = new Rectangle[WIDTH][HEIGHT + 1];
@@ -185,7 +188,7 @@ public class Gui2048 extends Application {
     pane.add(title, 0, 0);
     GridPane.setHalignment(title, HPos.LEFT);
     pane.add(textNums[WIDTH - 1][0], WIDTH - 1, 0);
-    colorBoard();
+    //colorBoard();
     updateFont();
 
     this.stack = new StackPane();

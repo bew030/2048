@@ -48,10 +48,4 @@ public class Square {
         }
         return Integer.toString(intValue);
     }
-
-    public static void main(String[] args) {
-        Square tester = new Square();
-        tester.setValue(2);
-        System.out.println(tester.getValue());
-    }
 }

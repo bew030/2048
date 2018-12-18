@@ -353,17 +353,4 @@ public class GameBoard {
     public int getHeight() {
         return height;
     }
-
-    public static void main(String[] args) {
-        GameBoard gameTester = new GameBoard(2, new int[]{0,0},2, new int[]{0,1});
-        gameTester.generateSetPiece(6, new int[]{0,2});
-        gameTester.generateSetPiece(8,new int[]{0,3});
-        int iterator = 5;
-        for (int i = 1; i < 4; i++) {
-            for (int j = 0; j < 4; j++) {
-                gameTester.generateSetPiece(2*iterator, new int[]{i,j});
-                iterator++;
-            }
-        }
-    }
 }
