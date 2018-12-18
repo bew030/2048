@@ -98,8 +98,8 @@ public class Gui2048 extends Application {
     pane.setHgap(15);
     pane.setVgap(15);
 
-    //initalize two arrays
-    squares = copyBoard();
+    //deep copy Squares, create new array for text
+    copyBoard();
     textNums = new Text[WIDTH][HEIGHT + 1];
 
     //initialize game title and score headers
@@ -128,8 +128,25 @@ public class Gui2048 extends Application {
         pane.add(tiles[x][y], x, y);
 
         Text tileText = new Text();
-        tileText.setText(copySquares[x][y].toString());      
+        tileText.setText(copySquares[x][y].toString());
+
+        if (board.overallGameBoard[y - 1][x].getValue() != 0) {
+          pane.add(textNums[x][y], x, y);
+        }
+
+        GridPane.setHalignment(textNums[x][y], HPos.CENTER);
+        }
       }
+
+      this.stack = new StackPane();
+      stack.getChildren.addAll(pane);
+
+      this.scene = new Scene(stack);
+      scene.setOnKeyPressed(new KeyHandler());
+
+      primaryStage.setTitle("2048");
+      primaryStage.setScene(scene);
+      primaryStage.show();
     }
 
 
