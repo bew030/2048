@@ -5,6 +5,7 @@ import java.util.Random;
 public class GameBoard {
     private Square[][] overallGameBoard;
     private ArrayList<int[]> unoccupiedCoordinates;
+    private int score;
     //private ArrayList<int[]> occupiedCoordinates;
     boolean piecesMoved;
     boolean combinedAlready;
@@ -25,6 +26,7 @@ public class GameBoard {
         generateRandomPiece();
         piecesMoved = false;
         combinedAlready = false;
+        score = 0;
     }
 
     public GameBoard(int aVal, int[] a, int bVal, int[] b) {
@@ -41,6 +43,7 @@ public class GameBoard {
         generateSetPiece(bVal, b);
         piecesMoved = false;
         combinedAlready = false;
+        score = 0;
     }
 
     public void dropLeft() {
@@ -49,6 +52,7 @@ public class GameBoard {
                 if (overallGameBoard[i][j-1].getValue()!=0) {
                     if (overallGameBoard[i][j-1].getValue()==overallGameBoard[i][j].getValue()) { // if conditions for if side item is of equal value
                         overallGameBoard[i][j-1].doubleValue();
+                        score += overallGameBoard[i][j-1].getValue();
                         overallGameBoard[i][j].resetValue();
                         piecesMoved = true;
                     }
@@ -83,6 +87,7 @@ public class GameBoard {
                 if (overallGameBoard[i][j+1].getValue()!=0) {
                     if (overallGameBoard[i][j+1].getValue()==overallGameBoard[i][j].getValue()) { // if conditions for if side item is of equal value
                         overallGameBoard[i][j+1].doubleValue();
+                        score += overallGameBoard[i][j+1].getValue();
                         overallGameBoard[i][j].resetValue();
                         piecesMoved = true;
                     }
@@ -117,6 +122,7 @@ public class GameBoard {
                 if (overallGameBoard[i-1][j].getValue()!=0) {
                     if (overallGameBoard[i-1][j].getValue()==overallGameBoard[i][j].getValue()) { // if conditions for if side item is of equal value
                         overallGameBoard[i-1][j].doubleValue();
+                        score += overallGameBoard[i-1][j].getValue();
                         overallGameBoard[i][j].resetValue();
                         piecesMoved = true;
                     }
@@ -151,6 +157,7 @@ public class GameBoard {
                 if (overallGameBoard[i+1][j].getValue()!=0) {
                     if (overallGameBoard[i+1][j].getValue()==overallGameBoard[i][j].getValue()) { // if conditions for if side item is of equal value
                         overallGameBoard[i+1][j].doubleValue();
+                        score += overallGameBoard[i+1][j].getValue();
                         overallGameBoard[i][j].resetValue();
                         piecesMoved = true;
                     }
@@ -302,6 +309,10 @@ public class GameBoard {
             }
         }
         unoccupiedArrayList.remove(location);
+    }
+
+    public int getScore() {
+        return score;
     }
 
     public static void main(String[] args) {
