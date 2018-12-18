@@ -119,7 +119,6 @@ public class Gui2048 extends Application {
     for (int i = 0; i < board.overallGameBoard.length; i++) {
       for (int j = 0; j < board.overallGameBoard[i].length; j++) {
         tiles[i][j].setFill(BACKGROUND);
-
       }
     }
   }

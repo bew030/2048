@@ -9,10 +9,10 @@ public class GameBoard {
     public int score;
     public int width;
     public int height;
+    public int maxNumber;
     public boolean gameOver;
     final int DEFAULT_HEIGHT = 4;
     final int DEFAULT_WIDTH = 4;
-    //private ArrayList<int[]> occupiedCoordinates;
     boolean piecesMoved;
     boolean combinedAlready;
     public int[] possibleGeneratedValue = new int[]{2,4}; // odds of 2 are 90%, odds of 4 are 10%
@@ -32,6 +32,7 @@ public class GameBoard {
         updateUnoccupied();
         generateRandomPiece();
         generateRandomPiece();
+        maxNumber = 0; // not technically correct (should be 2 or 4, could possibly change later)
         piecesMoved = false;
         combinedAlready = false;
         score = 0;
@@ -82,13 +83,15 @@ public class GameBoard {
         for (int i = 0; i < height; i++) { // if you don't include this for loop, some stuff doesn't get combined
             for (int j = 1; j < width; j++) {
                 for (int k = j-1; k > -1; k--) {
-
                     if (overallGameBoard[i][k].getValue()!=0 && overallGameBoard[i][k].getValue() != overallGameBoard[i][j].getValue()) {
                         break;
                     }
                     else if (overallGameBoard[i][k].getValue() == overallGameBoard[i][j].getValue()) {
                         overallGameBoard[i][k].doubleValue();
                         score += overallGameBoard[i][k].getValue();
+                        if (overallGameBoard[i][k].getValue()>maxNumber) {
+                            maxNumber = overallGameBoard[i][k].getValue();
+                        }
                         overallGameBoard[i][j].resetValue();
                         piecesMoved = true;
                     }
@@ -127,6 +130,9 @@ public class GameBoard {
                     else if (overallGameBoard[i][k].getValue() == overallGameBoard[i][j].getValue()) {
                         overallGameBoard[i][k].doubleValue();
                         score += overallGameBoard[i][k].getValue();
+                        if (overallGameBoard[i][k].getValue()>maxNumber) {
+                            maxNumber = overallGameBoard[i][k].getValue();
+                        }
                         overallGameBoard[i][j].resetValue();
                         piecesMoved = true;
                     }
@@ -157,23 +163,6 @@ public class GameBoard {
     }
 
     public void dropUp() {
-        for (int i = 0; i < height; i++) { // if you don't include this for loop, some stuff doesn't get combined
-            for (int j = 1; j < width; j++) {
-                for (int k = j-1; k > -1; k--) {
-
-                    if (overallGameBoard[i][k].getValue()!=0 && overallGameBoard[i][k].getValue() != overallGameBoard[i][j].getValue()) {
-                        break;
-                    }
-                    else if (overallGameBoard[i][k].getValue() == overallGameBoard[i][j].getValue()) {
-                        overallGameBoard[i][k].doubleValue();
-                        score += overallGameBoard[i][k].getValue();
-                        overallGameBoard[i][j].resetValue();
-                        piecesMoved = true;
-                    }
-                }
-            }
-        }
-
         for (int i = 1; i < height; i++) { // if you don't include this for loop, some stuff doesn't get combined
             for (int j = 0; j < width; j++) {
                 for (int k = i-1; k > -1; k--) {
@@ -183,6 +172,9 @@ public class GameBoard {
                     else if (overallGameBoard[k][j].getValue() == overallGameBoard[i][j].getValue()) {
                         overallGameBoard[k][j].doubleValue();
                         score += overallGameBoard[k][j].getValue();
+                        if (overallGameBoard[k][j].getValue()>maxNumber) {
+                            maxNumber = overallGameBoard[k][j].getValue();
+                        }
                         overallGameBoard[i][j].resetValue();
                         piecesMoved = true;
                     }
@@ -222,6 +214,9 @@ public class GameBoard {
                     else if (overallGameBoard[k][j].getValue() == overallGameBoard[i][j].getValue()) {
                         overallGameBoard[k][j].doubleValue();
                         score += overallGameBoard[k][j].getValue();
+                        if (overallGameBoard[k][j].getValue()>maxNumber) {
+                            maxNumber = overallGameBoard[k][j].getValue();
+                        }
                         overallGameBoard[i][j].resetValue();
                         piecesMoved = true;
                     }
@@ -413,6 +408,9 @@ public class GameBoard {
             }
             else {
                 System.out.println("ERROR: Wrong input. Try again!");
+            }
+            if (testerBoard.maxNumber == 2048) {
+                System.out.println("CONGRATULATIONS, YOU WON! Press WASD key to continue, or Q to quit");
             }
             System.out.println();
         }
