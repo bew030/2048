@@ -19,7 +19,9 @@ public class Gui2048 extends Application {
   private static final int TILE_GAP = 2;
   private static final int WIDTH = 4;
   private static final int HEIGHT = 4;
-  private static final Color BACKGROUND = Color.DARKGRAY;
+  private static final Color BACKGROUND = Color.rgb(238, 228, 218, 0.35);
+  private static final Color COLOR_VALUE_LIGHT = Color.rgb(249, 246, 242);
+  private static final Color COLOR_VALUE_DARK = Color.rgb(119, 110, 101);
 
   private static final int LOW_TEXT = 55;
   private static final int MID_TEXT = 45;
@@ -39,43 +41,40 @@ public class Gui2048 extends Application {
 
 
   private Color replaceColor(int value) {
-    Color fillColor = null;
+    Color fillColor = BACKGROUND;
 
     if (value == 2) {
-      fillColor = Color.LIGHTSLATEGRAY;
+      fillColor = Color.rgb(238, 228, 218);
     }
     else if (value == 4) {
-      fillColor = Color.LIGHTGRAY;
+      fillColor = Color.rgb(237, 224, 200);
     }
     else if (value == 8) {
-      fillColor = Color.PEACHPUFF;
+      fillColor = Color.rgb(242, 177, 121);
     }
     else if (value == 16) {
-      fillColor = Color.ORANGE;
+      fillColor = Color.rgb(245, 149, 99);
     }
     else if (value == 32) {
-      fillColor = Color.ORANGERED;
+      fillColor = Color.rgb(246, 124, 95);
     }
     else if (value == 64) {
-      fillColor = Color.RED;
+      fillColor = Color.rgb(246, 94, 59);
     }
     else if (value == 128) {
-      fillColor = Color.LIGHTYELLOW;
+      fillColor = Color.rgb(237, 207, 114);
     }
     else if (value == 256) {
-      fillColor = Color.YELLOW;
+      fillColor = Color.rgb(237, 204, 97);
     }
     else if (value == 512) {
-      fillColor = Color.GOLD;
+      fillColor = Color.rgb(237, 200, 80);
     }
     else if (value == 1024) {
-      fillColor = Color.GOLD.darker();
+      fillColor = Color.rgb(237, 197, 63);
     }
     else if (value == 2048) {
-      fillColor = Color.GOLD;
-    }
-    else {
-      fillColor = BACKGROUND;
+      fillColor = Color.rgb(237, 194, 46);
     }
     return fillColor;
   }
@@ -84,8 +83,8 @@ public class Gui2048 extends Application {
 
   //needs public for game board height and width
   private void copyBoard() {
-    for (int i = 0; i < board.getWidth(); i++) {
-      for (int j = 0; j < board.getHeight(); j++) {
+    for (int i = 0; i < board.getHeight(); i++) {
+      for (int j = 0; j < board.getWidth(); j++) {
         copySquares[i][j] = board.overallGameBoard[i][j];
       }
     }
@@ -105,6 +104,12 @@ public class Gui2048 extends Application {
         else {
           textNums[i][j].setFont((Font.font("Times New Roman",
                          FontWeight.BOLD, HIGH_TEXT)));
+        }
+        if (board.overallGameBoard[i][j].getValue() < 8) {
+          textNums[i][j].setFill(COLOR_VALUE_DARK);
+        }
+        else {
+          textNums[i][j].setFill(COLOR_VALUE_LIGHT);
         }
       }
     }
@@ -126,17 +131,17 @@ public class Gui2048 extends Application {
         newTile.setHeight(100);
 
         tiles[x][y] = newTile;
-        tiles[x][y].setFill(replaceColor(copySquares[x][y].getValue()));
+        tiles[x][y].setFill(replaceColor(copySquares[y][x].getValue()));
         pane.add(tiles[x][y], x, y + 1);
 
         Text tileText = new Text();
-        tileText.setText(copySquares[x][y].toString());
+        tileText.setText(copySquares[y][x].toString());
         textNums[x][y] = tileText;
       }
     }
     for (int i = 0; i < HEIGHT; i++) {
       for (int j = 0; j < WIDTH; j++) {
-        if (copySquares[i][j].getValue() != 0) {
+        if (copySquares[j][i].getValue() != 0) {
           pane.add(textNums[i][j], i, j + 1);
           GridPane.setHalignment(textNums[i][j], HPos.CENTER);
         }
@@ -188,23 +193,22 @@ public class Gui2048 extends Application {
     GridPane.setHalignment(title, HPos.LEFT);
     pane.add(score, WIDTH - 1, 0);
     GridPane.setHalignment(score, HPos.RIGHT);
-    //pane.add();
     colorBoard();
-    //updateFont();
+    updateFont();
 
 
     this.stack = new StackPane();
     stack.getChildren().addAll(pane);
 
     this.scene = new Scene(stack);
-    //scene.setOnKeyPressed(new KeyHandler());
+    scene.setOnKeyPressed(new KeyHandler());
 
     primaryStage.setTitle("2048");
     primaryStage.setScene(scene);
     primaryStage.show();
     }
 
-    /**
+
 
   private class KeyHandler implements EventHandler<KeyEvent> {
     @Override
@@ -251,5 +255,5 @@ public class Gui2048 extends Application {
     }
   }
 
-**/
+
 }
