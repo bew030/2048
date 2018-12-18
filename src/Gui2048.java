@@ -139,6 +139,7 @@ public class Gui2048 extends Application {
 
   private void update() {
     clearGrid();
+    copyBoard();
     //update score
     textNums[WIDTH - 1][0].setText("Score: " + board.getScore());
     textNums[WIDTH - 1][0].setFont(Font.font("Times New Roman", 20));
@@ -171,7 +172,7 @@ public class Gui2048 extends Application {
     title.setFont(Font.font("Times New Roman", 50));
     title.setFill(Color.BLACK);
     Text score = new Text();
-    //score.setText("Score: " + board.getScore()); needs getScore method in GB class
+    score.setText("Score: " + board.getScore()); needs getScore method in GB class
     textNums[WIDTH - 1][0] = score;
     textNums[WIDTH - 1][0].setFont(Font.font("Times New Roman", 20));
     textNums[WIDTH - 1][0].setFill(Color.BLACK);
