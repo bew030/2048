@@ -223,7 +223,6 @@ public class Gui2048 extends Application {
         }
       }
     }
-    colorBoard();
     updateFont();
     //updates color of text to reflect value
     for (int i = 0; i < board.getHeight(); i++) {
