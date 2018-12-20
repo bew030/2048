@@ -276,7 +276,7 @@ public class Gui2048 extends Application {
       }
 
       //prints game over message
-      if (board.gameOver()) { //|| board.gameOver) {
+      if (board.gameOver() || board.gameOver) {
         board.gameOver = true;
         Text endGame = new Text();
         endGame.setText("Game Over!");
