@@ -263,6 +263,10 @@ public class GameBoard {
         }
     }
 
+    public Square[][] getGameBoard() {
+        return overallGameBoard;
+    }
+
     public void updateUnoccupied() {
         for (int i = 0; i < height; i++) {
             for (int j = 0; j < width; j++) {
@@ -287,25 +291,25 @@ public class GameBoard {
             for (int i = 0; i < height; i++) { // row iterator
                 for (int j = 0; j < width; j++) { // column iterator
                     // check left condition
-                    if ((j-1)>0) {
+                    if ((j-1)>=0) {
                         if (overallGameBoard[i][j-1].getValue()==overallGameBoard[i][j].getValue()) {
                             return false;
                         }
                     }
                     // check right condition
-                    else if ((j+1)<width) {
+                    if ((j+1)<width) {
                         if (overallGameBoard[i][j+1].getValue()==overallGameBoard[i][j].getValue()) {
                             return false;
                         }
                     }
                     // check up condition
-                    else if ((i-1)>-1) {
+                    if ((i-1)>=0) {
                         if (overallGameBoard[i-1][j].getValue()==overallGameBoard[i][j].getValue()) {
                             return false;
                         }
                     }
                     // check down condition
-                    else if ((i+1)<height+1) {
+                    if ((i+1)<height) {
                         if (overallGameBoard[i+1][j].getValue()==overallGameBoard[i][j].getValue()) {
                             return false;
                         }
@@ -400,8 +404,26 @@ public class GameBoard {
         return height;
     }
 
-
+    /**
     public static void main(String[] args) {
+        GameBoard tester = new GameBoard(2,new int[]{0,0},4,new int[]{0,1});
+        tester.generateSetPiece(8,new int[]{0,2});
+        tester.generateSetPiece(4,new int[]{0,3});
+        tester.generateSetPiece(4,new int[]{1,0});
+        tester.generateSetPiece(8,new int[]{1,1});
+        tester.generateSetPiece(32,new int[]{1,2});
+        tester.generateSetPiece(2,new int[]{1,3});
+        tester.generateSetPiece(8,new int[]{2,0});
+        tester.generateSetPiece(2,new int[]{2,1});
+        tester.generateSetPiece(8,new int[]{2,2});
+        tester.generateSetPiece(4,new int[]{2,3});
+        tester.generateSetPiece(2,new int[]{3,0});
+        tester.generateSetPiece(16,new int[]{3,1});
+        tester.generateSetPiece(2,new int[]{3,2});
+        tester.generateSetPiece(4,new int[]{3,3});
+        tester.printViewer();
+        System.out.println(tester.gameOver());
+
         /**
         Scanner scan = new Scanner(System.in);
         System.out.println("Welcome to twenty-fort-neight. WASD controls. Good Luck!");
@@ -434,6 +456,7 @@ public class GameBoard {
             System.out.println();
         }
         System.out.println("GAME OVER. Final score: "+testerBoard.getScore());
-         **/
+
     }
+     **/
 }

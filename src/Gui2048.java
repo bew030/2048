@@ -1,5 +1,4 @@
 import javafx.application.*;
-import javafx.scene.control.*;
 import javafx.scene.*;
 import javafx.scene.paint.*;
 import javafx.scene.shape.*;
@@ -9,14 +8,10 @@ import javafx.event.*;
 import javafx.scene.input.*;
 import javafx.scene.text.*;
 import javafx.geometry.*;
-import java.util.*;
-import java.io.*;
 
 
 public class Gui2048 extends Application {
 
-  private static final int PADDING = 10;
-  private static final int TILE_GAP = 2;
   private static final int WIDTH = 4;
   private static final int HEIGHT = 4;
   private static final Color BACKGROUND = Color.rgb(238, 228, 218, 0.35);
@@ -249,25 +244,24 @@ public class Gui2048 extends Application {
   private class KeyHandler implements EventHandler<KeyEvent> {
     @Override
     public void handle(KeyEvent e) {
+
       //after each key press, check if game is over
       if (board.gameOver) {
         return;
       }
       if (e.getCode() == KeyCode.LEFT) {
         board.dropLeft();
-      }
-      else if (e.getCode() == KeyCode.RIGHT) {
+      } else if (e.getCode() == KeyCode.RIGHT) {
         board.dropRight();
-      }
-      else if (e.getCode() == KeyCode.DOWN) {
+      } else if (e.getCode() == KeyCode.DOWN) {
         board.dropDown();
-      }
-      else if (e.getCode() == KeyCode.UP) {
+      } else if (e.getCode() == KeyCode.UP) {
         board.dropUp();
-      }
-      else if (e.getCode() == KeyCode.Q) {
+      } else if (e.getCode() == KeyCode.Q) {
         board.gameOver = true;
       }
+
+      // NEEDS AN ELSE CONDITION FOR IF SOMEONE ENTERS ANY OTHER CHARACTER
 
       update(); //updates GUI after each move
 
@@ -282,7 +276,7 @@ public class Gui2048 extends Application {
       }
 
       //prints game over message
-      if (board.gameOver() || board.gameOver) {
+      if (board.gameOver()) { //|| board.gameOver) {
         board.gameOver = true;
         Text endGame = new Text();
         endGame.setText("Game Over!");
@@ -293,6 +287,4 @@ public class Gui2048 extends Application {
 
     }
   }
-
-
 }
