@@ -88,8 +88,8 @@ public class Gui2048 extends Application {
 
   //updates font of text objects visually
   private void updateFont() {
-    for (int i = 0; i < HEIGHT; i++) {
-      for (int j = 0; j < WIDTH; j++) {
+    for (int i = 0; i < board.getHeight(); i++) {
+      for (int j = 0; j < board.getWidth(); j++) {
         //updates size of text based on value
         if (copySquares[j][i].getValue() < 128) {
           textNums[i][j].setFont((Font.font("Times New Roman",
@@ -120,16 +120,9 @@ public class Gui2048 extends Application {
   //iterates through entire 4x4 grid
   //creates new tile objects for each box, sets proper color and text and aligns
   private void colorBoard() {
-    for (int x = 0; x < HEIGHT; x++) {
-      for (int y = 0; y < WIDTH; y++) {
-        Rectangle newTile = new Rectangle();
-        newTile.setWidth(100);
-        newTile.setHeight(100);
-
-        tiles[x][y] = newTile;
+    for (int x = 0; x < board.getHeight(); x++) {
+      for (int y = 0; y < board.getWidth(); y++) {
         tiles[x][y].setFill(replaceColor(copySquares[y][x].getValue()));
-        pane.add(tiles[x][y], x, y + 1);
-
         Text tileText = new Text();
         tileText.setText(copySquares[y][x].toString());
         textNums[x][y] = tileText;
@@ -156,8 +149,8 @@ public class Gui2048 extends Application {
     updateFont();
 
     //updates color of text to reflect value
-    for (int i = 0; i < HEIGHT; i++) {
-      for (int j = 0; j < WIDTH; j++) {
+    for (int i = 0; i < board.getHeight(); i++) {
+      for (int j = 0; j < board.getWidth(); j++) {
         if (copySquares[j][i].getValue() < 8) {
           textNums[i][j].setFill(COLOR_VALUE_DARK);
         }
@@ -185,9 +178,9 @@ public class Gui2048 extends Application {
 
     //initialize variables and copy over board
     copySquares = new Square[board.getWidth()][board.getHeight()];
-    tiles = new Rectangle[HEIGHT][WIDTH];
+    tiles = new Rectangle[board.getHeight()][board.getWidth()];
     copyBoard();
-    textNums = new Text[HEIGHT][WIDTH];
+    textNums = new Text[board.getHeight()][board.getWidth()];
 
     //creating yellow title block
     Rectangle titleBlock = new Rectangle();
@@ -208,13 +201,33 @@ public class Gui2048 extends Application {
 
     pane.add(title, 0, 0);
     GridPane.setHalignment(title, HPos.CENTER);
-    pane.add(score, WIDTH - 1, 0);
+    pane.add(score, board.getWidth() - 1, 0);
     GridPane.setHalignment(score, HPos.CENTER);
+
+    for (int x = 0; x < board.getHeight(); x++) {
+      for (int y = 0; y < board.getWidth(); y++) {
+        Rectangle newTile = new Rectangle();
+        newTile.setWidth(100);
+        newTile.setHeight(100);
+
+        tiles[x][y] = newTile;
+        tiles[x][y].setFill(replaceColor(copySquares[y][x].getValue()));
+        pane.add(tiles[x][y], x, y + 1);
+
+        Text tileText = new Text();
+        tileText.setText(copySquares[y][x].toString());
+        textNums[x][y] = tileText;
+        if (copySquares[y][x].getValue() != 0) {
+          pane.add(textNums[x][y], x, y + 1);
+          GridPane.setHalignment(textNums[x][y], HPos.CENTER);
+        }
+      }
+    }
     colorBoard();
     updateFont();
     //updates color of text to reflect value
-    for (int i = 0; i < HEIGHT; i++) {
-      for (int j = 0; j < WIDTH; j++) {
+    for (int i = 0; i < board.getHeight(); i++) {
+      for (int j = 0; j < board.getWidth(); j++) {
         if (copySquares[j][i].getValue() < 8) {
           textNums[i][j].setFill(COLOR_VALUE_DARK);
         }
