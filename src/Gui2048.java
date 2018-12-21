@@ -8,6 +8,8 @@ import javafx.event.*;
 import javafx.scene.input.*;
 import javafx.scene.text.*;
 import javafx.geometry.*;
+import java.util.Scanner;
+import javafx.scene.control.TextField;
 
 
 public class Gui2048 extends Application {
@@ -166,7 +168,14 @@ public class Gui2048 extends Application {
   @Override
   public void start(Stage primaryStage) {
     //creates new game
-    this.board = new GameBoard();
+    Scanner scan = new Scanner(System.in);
+    System.out.println("What are the dimensions of the game you want to play?");
+    System.out.print("x: ");
+    int xCoord = scan.nextInt();
+    System.out.print("y: ");
+    int yCoord = scan.nextInt();
+    scan.close();
+    this.board = new GameBoard(xCoord,yCoord);
     //create pane to hold visual representation of game
     pane = new GridPane();
     pane.setAlignment(Pos.CENTER);

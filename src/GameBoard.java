@@ -1,7 +1,6 @@
 import java.util.Arrays;
 import java.util.ArrayList;
 import java.util.Random;
-import java.util.Scanner;
 
 public class GameBoard {
     public Square[][] overallGameBoard;
@@ -11,7 +10,7 @@ public class GameBoard {
     public int height;
     public int maxNumber;
     public boolean gameOver;
-    final int DEFAULT_HEIGHT = 2;
+    final int DEFAULT_HEIGHT = 4;
     final int DEFAULT_WIDTH = 4;
     boolean piecesMoved;
     boolean combinedAlready;
