@@ -11,7 +11,7 @@ public class GameBoard {
     public int height;
     public int maxNumber;
     public boolean gameOver;
-    final int DEFAULT_HEIGHT = 4;
+    final int DEFAULT_HEIGHT = 2;
     final int DEFAULT_WIDTH = 4;
     boolean piecesMoved;
     boolean combinedAlready;
@@ -25,6 +25,26 @@ public class GameBoard {
         unoccupiedCoordinates = new ArrayList<int[]>();
         width = DEFAULT_WIDTH;
         height = DEFAULT_HEIGHT;
+        overallGameBoard = new Square[height][width];
+        for (int i = 0; i < height; i++) {
+            for (int j = 0; j < width; j++) {
+                overallGameBoard[i][j] = new Square();
+            }
+        }
+        updateUnoccupied();
+        generateRandomPiece();
+        generateRandomPiece();
+        maxNumber = 0; // not technically correct (should be 2 or 4, could possibly change later)
+        piecesMoved = false;
+        combinedAlready = false;
+        score = 0;
+        gameOver = false;
+    }
+
+    public GameBoard(int x, int y) {
+        unoccupiedCoordinates = new ArrayList<int[]>();
+        width = x;
+        height = y;
         overallGameBoard = new Square[height][width];
         for (int i = 0; i < height; i++) {
             for (int j = 0; j < width; j++) {
@@ -126,7 +146,7 @@ public class GameBoard {
         }
         for (int i = 0; i < height; i++) { // row iterator
             for (int j = width-2; j > -1; j--) { // column iterator, double check width-2
-                for (int k = 3; k > j; k--) { // loops all items in front
+                for (int k = width-1; k > j; k--) { // loops all items in front
                     if (overallGameBoard[i][j].getValue()!=0 && overallGameBoard[i][k].getValue()==0) {
                         int[] newOccupiedSpace = new int[]{i,k};
                         int[] prevLoc = new int[]{overallGameBoard[i][j].getxCoord(),
@@ -417,26 +437,6 @@ public class GameBoard {
 
     // TESTER METHODS: USED FOR MAKING TESTS AND SETTING PIECES, NOT USED OTHERWISE
 
-    private GameBoard(int x, int y) {
-        unoccupiedCoordinates = new ArrayList<int[]>();
-        width = x;
-        height = y;
-        //occupiedCoordinates = new ArrayList<int[]>();
-        overallGameBoard = new Square[height][width];
-        for (int i = 0; i < height; i++) {
-            for (int j = 0; j < width; j++) {
-                overallGameBoard[i][j] = new Square();
-            }
-        }
-        updateUnoccupied();
-        generateRandomPiece();
-        generateRandomPiece();
-        piecesMoved = false;
-        combinedAlready = false;
-        score = 0;
-        gameOver = false;
-    }
-
     private GameBoard(int aVal, int[] a, int bVal, int[] b) {
         unoccupiedCoordinates = new ArrayList<int[]>();
         //occupiedCoordinates = new ArrayList<int[]>();
@@ -475,11 +475,19 @@ public class GameBoard {
     }
 
     private void printViewer() {
-        for (int i = 0; i < 4; i++) {
-            for (int j = 0; j < 4; j++) {
+        for (int i = 0; i < height; i++) {
+            for (int j = 0; j < width; j++) {
                 System.out.print(overallGameBoard[i][j] + " ");
             }
             System.out.println();
         }
+    }
+
+    public static void main(String[] args) {
+        GameBoard tester = new GameBoard(4,1);
+        tester.printViewer();
+        System.out.println();
+        tester.dropDown();
+        tester.printViewer();
     }
 }
