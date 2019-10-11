@@ -8,3 +8,10 @@ A program for the game 2048 written in Java that runs on the desktop. The progra
 To specify game board size, follow the command line prompts for x and y dimensions. Later improvements can be made by implementing a GUI button interface.
 
 Link to original game: http://2048game.com/
+
+
+# Badges 
+[![GitHub issues](https://img.shields.io/github/issues/bew030/2048?color=purple)](https://github.com/bew030/2048/issues)
+[![GitHub forks](https://img.shields.io/github/forks/bew030/2048?color=orange)](https://github.com/bew030/2048/network)
+[![GitHub stars](https://img.shields.io/github/stars/bew030/2048)](https://github.com/bew030/2048/stargazers)
+[![HitCount](http://hits.dwyl.io/bew030/2048.svg)](http://hits.dwyl.io/bew030/2048)
